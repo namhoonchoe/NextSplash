@@ -8,77 +8,91 @@ import {
   useOutsideClick,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import { useSetRecoilState, useRecoilState } from "recoil";
 import { SearchIcon, CloseIcon } from "./SvgIcons";
+
+const SearchLayout = chakra(Flex, {
+  baseStyle: {
+    width: "60%",
+    height: "100%",
+    justifyContent: "start",
+    alignItems: "center",
+    backgroundColor: "gray.300",
+    borderRadius: "xl",
+    padding: "2%",
+    position: "relative",
+  },
+});
+
+const SearchContainer = chakra(Flex, {
+  baseStyle: {
+    width: "100%",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "start",
+    position: "absolute",
+    top: 3,
+    left: 2,
+    right: 2,
+  },
+});
+
+const SearchIconContainer = chakra(Flex, {
+  baseStyle: {
+    width: "100%",
+    height: "5rem",
+    justifyContent: "center",
+    alignItems: "center",
+    focus: "outline-none",
+  },
+});
+
+const SearchForm = chakra("form", {
+  baseStyle: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "start",
+    alignItems: "center",
+    width: "98%",
+    height: "100%",
+  },
+});
+
+const InputBox = chakra("input", {
+  baseStyle: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "gray.300",
+  },
+});
+
+const NavigationContainer = chakra(Flex, {
+  baseStyle: {
+    width: "100%",
+    height: "10vh",
+    flexDirection: "column",
+    alignItems: "start",
+    justifyContent: "center",
+    borderRadius: "xl",
+    mt: 5,
+  },
+});
+
 
 export default function SearchInput() {
   const [keyword, setKeyword] = useState<string>("");
   /* const [searchTerm, setSearchTerm] = useRecoilState(searchQueryState);
   const redirectionValue = useSetRecoilState(redirectionState); */
-  const { pathname } = useRouter();
 
   const { onOpen, onClose, isOpen } = useDisclosure();
 
-  const onChange = (e: any) => {
+  const changeHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setKeyword(e.target.value);
+    setKeyword(e.currentTarget.value);
   };
 
-  const SearchLayout = chakra(Flex, {
-    baseStyle: {
-      width: "60%",
-      height: "100%",
-      justifyContent: "start",
-      alignItems: "center",
-      backgroundColor: "gray.300",
-      borderRadius: "xl",
-      padding: "2%",
-      position: "relative",
-    },
-  });
-
-  const SearchForm = chakra("form", {
-    baseStyle: {
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "start",
-      alignItems: "center",
-      width: "98%",
-      height: "100%",
-    },
-  });
-
-  const InputBox = chakra("input", {
-    baseStyle: {
-      width: "100%",
-      height: "100%",
-      backgroundColor: "gray.300",
-    },
-  });
-
-  const NavigationBox = chakra(Flex, {
-    baseStyle: {
-      width: "100%",
-      height: "12rem",
-      flexDirection: "column",
-      alignItems: "start",
-      justifyContent: "center",
-    },
-  });
-
-  const CenteredBox = chakra(Flex, {
-    baseStyle: {
-      width: "100%",
-      height: "5rem",
-      justifyContent: "center",
-      alignItems: "center",
-      focus: "outline-none",
-    },
-  });
-
-  const onSubmit = (e: any) => {
+  const handleSubmit = (e:React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (keyword !== "") {
       //     setSearchTerm({ ...searchTerm, query: keyword });
@@ -91,20 +105,12 @@ export default function SearchInput() {
   return (
     <SearchLayout>
       {isOpen ? (
-        <Flex
-          flexDirection={"column"}
-          alignItems={"start"}
-          justifyContent={"center"}
-          width="100%"
-          position={"absolute"}
-          top={3}
-          left={2}
-          right={2}
+        <SearchContainer
         >
-          <SearchForm onSubmit={onSubmit}>
+          <SearchForm onSubmit={() => handleSubmit}>
             <InputBox
               value={keyword}
-              onChange={onChange}
+              onChange={changeHandler}
               placeholder="Search"
             />
             <Flex
@@ -115,15 +121,7 @@ export default function SearchInput() {
               <CloseIcon />
             </Flex>
           </SearchForm>
-          <Flex
-            flexDirection={"column"}
-            justifyContent={"start"}
-            width={"98%"}
-            height={"10vh"}
-            backgroundColor={"green.400"}
-            borderRadius={"xl"}
-            mt={5}
-          >
+          <NavigationContainer>
             <Fade in={isOpen}>
               <Flex>
                 <Link href="/Search">
@@ -136,14 +134,14 @@ export default function SearchInput() {
                 </Link>
               </Flex>
             </Fade>
-          </Flex>
-        </Flex>
+          </NavigationContainer>
+        </SearchContainer>
       ) : (
         <SlideFade in={!isOpen}>
-          <CenteredBox onClick={onOpen}>
+          <SearchIconContainer onClick={onOpen}>
             <SearchIcon />
             <p>Search</p>
-          </CenteredBox>
+          </SearchIconContainer>
         </SlideFade>
       )}
     </SearchLayout>
