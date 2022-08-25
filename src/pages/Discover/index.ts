@@ -1,3 +1,3 @@
-import DiscoverContainer from "./DiscoverContainer" 
+import DiscoverLayout from "./DiscoverLayout" 
 
-export default DiscoverContainer
+export default DiscoverLayout

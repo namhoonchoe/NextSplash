@@ -1,50 +1,46 @@
-import { createApi } from "unsplash-js";
+import axios, { AxiosInstance } from "axios";
+const ApiKey = process.env.NEXT_PUBLIC_UNSPLASH_API_KEY as string;
 
-const ApiKey = process.env.NEXT_PUBLIC_UNSPLASH_API_KEY as string
+const unsplashApi: AxiosInstance = axios.create({
+  baseURL: "https://api.unsplash.com/",
+  params: {
+    client_id: ApiKey,
+  },
+});
 
-const unsplash = createApi({
-  accessKey: ApiKey
-})
-
-export const getRandomPhotos = async () => {
-  const { response } = await unsplash.photos.getRandom({
-    count: 20,
-    featured: true,
+export const getRandomPhotos = async () =>
+  await unsplashApi.get("photos/random", {
+    params: {
+      count: 20,
+      featured: true,
+    },
   });
-  if (response !== undefined) {
-    return { props: { response } };
-  }
+
+export const getTopicList = async () => {
+  return await unsplashApi.get("topics", {
+    params: {
+      per_page: 20,
+      order_by: "featured",
+    },
+  });
 };
 
-export async function getRelatedPhotos(topicIds: Array<string>) {
-  const { response } = await unsplash.photos.getRandom({
-    count: 15,
-    topicIds: topicIds,
-    featured: true,
+export const getRelatedPhotos = async (topicIds: Array<string>) =>
+  await unsplashApi.get("photos/random", {
+    params: {
+      count: 15,
+      topicIds: topicIds,
+      featured: true,
+    },
   });
-  if (response !== undefined) {
-    return response;
-  }
-}
 
-export const getTopics = async () => {
-  const { response } = await unsplash.topics.list({
-    perPage: 20,
-    orderBy: "featured",
+export const getTopicPhotos = async (topicId: string) =>
+  await unsplashApi.get(`topics/${topicId}/photos`, {
+    params: {
+      topicIdOrSlug: topicId,
+      perPage: 20,
+    },
   });
-  if (response !== undefined) {
-    const { results } = response;
-    return results;
-  }
-};
-
-export async function getTopicPhotos(topicId: string) {
-  const { response } = await unsplash.topics.getPhotos({
-    topicIdOrSlug: topicId,
-    perPage: 20,
-  });
-  return response?.results as Array<ITopicPhoto> | undefined;
-}
 
 interface ISearchQuery {
   query: string;
@@ -53,30 +49,33 @@ interface ISearchQuery {
   orderBy?: any;
 }
 
-export async function searchPhotos(queryObject: ISearchQuery) {
+export const searchPhotos = async (queryObject: ISearchQuery) => {
   const { query, orientation, color, orderBy } = queryObject;
-  const { response } = await unsplash.search.getPhotos({
-    query,
-    orientation,
-    color,
-    orderBy,
+  await unsplashApi.get("search/photos", {
+    params: {
+      query,
+      orientation,
+      color,
+      orderBy,
+    },
   });
-  return response?.results as Array<ISearchPhoto> | undefined;
-}
+};
 
-export async function searchCollections(query: string) {
-  const { response } = await unsplash.search.getCollections({ query });
-  return response?.results as Array<ISearchCollection> | undefined;
-}
-
-export async function getCollection(id: string) {
-  const { response } = await unsplash.collections.get({ collectionId: id });
-  return response as ICollection | undefined;
-}
-
-export async function getCollectionPhotos(id: string) {
-  const { response } = await unsplash.collections.getPhotos({
-    collectionId: id,
+export const searchCollections = async (query: string) =>
+  await unsplashApi.get("search/collections", {
+    params: {
+      query,
+    },
   });
-  return response?.results as Array<ICoverPhoto> | undefined;
-}
+
+export const getCollection = async (id: string) => {
+  await unsplashApi.get(`collections/${id}`, { params: { collectionId: id } });
+};
+
+export const getCollectionPhotos = async (id: string) => {
+  await unsplashApi.get(`/collections/${id}/photos`, {
+    params: {
+      collectionId: id,
+    },
+  });
+};
