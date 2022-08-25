@@ -8,21 +8,24 @@ const unsplashApi: AxiosInstance = axios.create({
   },
 });
 
-export const getRandomPhotos = async () =>
-  await unsplashApi.get("photos/random", {
+export const getRandomPhotos = async () => {
+  const { data } = await unsplashApi.get("photos/random", {
     params: {
       count: 20,
       featured: true,
     },
   });
+  return data;
+};
 
 export const getTopicList = async () => {
-  return await unsplashApi.get("topics", {
+  const { data } = await unsplashApi.get("topics", {
     params: {
       per_page: 20,
       order_by: "featured",
     },
   });
+  return data;
 };
 
 export const getRelatedPhotos = async (topicIds: Array<string>) =>

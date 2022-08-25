@@ -29,38 +29,46 @@ interface ITopicCardProps {
 
 const TopicCardContainer = chakra(Flex, {
   baseStyle: {
-    width: "80%",
-    height: "50%",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "12vw",
+    height: "16vh",
     borderRadius: "lg",
-    backgroundPosition: "center",
+    backgroundPosition:"center",
+    backgroundRepeat:"no-repeat",
     backgroundSize: "cover",
   },
 });
 
 const TopicTitleContainer = chakra(Flex, {
   baseStyle: {
+    justifyContent: "center",
+    alignItems: "center",
     width: "100%",
     height: "100%",
     rounded: "lg",
-    backdropBrightness: "75%",
-    _hover: { backdropBrightness: "100%" },
+    backdropFilter:"brightness(0.75)",
+    _hover:{
+      backdropFilter:"brightness(1)"
+    }
   },
 });
 
-const TopicCardGrid = chakra(SimpleGrid, {
+const TopicCardGrid = chakra(Grid, {
   baseStyle: {
     width: "100%",
-    columns: 2,
-    spacingX: "40px",
-    spacingY: "20px",
+    gridTemplateColumns:"repeat(2, 1fr)",
+    justifyContent:"center",
+    rowGap:"2vh",
+    columnGap:"1vw"
   },
 });
 
 const TopicCard: React.FC<ITopicCardProps> = ({ topicTitle, imageUrl }) => {
   return (
-    <TopicCardContainer backgroundImage={`url(${imageUrl})`}>
+    <TopicCardContainer backgroundImage={`url(${imageUrl})`} >
       <TopicTitleContainer>
-        <Text> {topicTitle}</Text>
+        <Text color={"white"} fontWeight={"semibold"} fontSize={"md"}> {topicTitle}</Text>
       </TopicTitleContainer>
     </TopicCardContainer>
   );
@@ -71,16 +79,10 @@ const DrawerNavigation = () => {
   const btnRef = useRef() as any;
 
   const {
-    data:response,
+    data: topics,
     error,
     isLoading,
   } = useQuery<any>("topics", getTopicList);
-
-  useEffect(() => {
-    console.log(response);
-  }, []);
-
-
 
   return (
     <>
@@ -95,6 +97,7 @@ const DrawerNavigation = () => {
 
       <Drawer
         isOpen={isOpen}
+        size={"sm"}
         placement="right"
         onClose={onClose}
         finalFocusRef={btnRef}
@@ -104,24 +107,20 @@ const DrawerNavigation = () => {
           <DrawerCloseButton />
           <DrawerHeader>Featured Topics</DrawerHeader>
           <DrawerBody>
-            <>
-            {/*  {topics !== null && (
-                <TopicCardGrid>
-                  {topics?.map((topic: ITopic) => {
-                    return (
-                      <TopicCard
-                        key={topic.id}
-                        topicDescription={topic.description}
-                        topicTitle={topic.title}
-                        topicId={topic.id}
-                        //changeTopicInfo={changeTopicInfo}
-                        imageUrl={topic.cover_photo.urls.regular}
-                      />
-                    );
-                  })}
-                </TopicCardGrid>
-                )} */}
-            </>
+            <TopicCardGrid >
+              {topics?.map((topic: ITopic) => {
+                return (
+                  <TopicCard
+                    key={topic.id}
+                    topicDescription={topic.description}
+                    topicTitle={topic.title}
+                    topicId={topic.id}
+                    //changeTopicInfo={changeTopicInfo}
+                    imageUrl={topic.cover_photo.urls.regular}
+                  />
+                );
+              })}
+            </TopicCardGrid>
           </DrawerBody>
         </DrawerContent>
       </Drawer>
