@@ -10,13 +10,7 @@ export const ScreenLayout = chakra(Flex,{
 })
 
 
-export const MasonryLayout = chakra(Box,{
-  baseStyle:{
-    marginX:"auto",
-    padding:4,
-    width:"100%",
-  },
-})
+
 
 export const MasonryItem = chakra(Box, {
   baseStyle: {
