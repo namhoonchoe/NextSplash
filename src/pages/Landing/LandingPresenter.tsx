@@ -1,7 +1,7 @@
 import React from "react";
-import { MasonryGrid } from "@components/Layouts";
+import { MasonryLayout, MasonryItem } from "@components/Layouts";
 import ImageCard from "@components/ImageCard";
-import { chakra, Flex } from "@chakra-ui/react";
+import { chakra, Flex, Box } from "@chakra-ui/react";
 
 interface ILandingProps {
   randomPhotos: any;
@@ -11,11 +11,13 @@ interface ILandingProps {
 
 const MainContainer = chakra(Flex, {
   baseStyle: {
-    alignItems: "center",
+    alignItems: "start",
     justifyContent: "center",
     width: "90vw",
   },
 });
+
+
 
 const LandingPresenter: React.FC<ILandingProps> = ({
   randomPhotos,
@@ -24,18 +26,19 @@ const LandingPresenter: React.FC<ILandingProps> = ({
 }) => {
   return (
     <MainContainer>
-      <MasonryGrid>
+      <MasonryLayout sx={{ columnCount: 5, columnGap: "2%" }}>
         {randomPhotos?.map((randomPhoto: any) => {
           return (
-            <ImageCard
-              key={randomPhoto.id}
-              width={randomPhoto.width}
-              height={randomPhoto.height}
-              source={randomPhoto.urls.regular}
-            />
+            <MasonryItem key={randomPhoto.id}>
+              <ImageCard
+                width={randomPhoto.width}
+                height={randomPhoto.height}
+                source={randomPhoto.urls.regular}
+              />
+            </MasonryItem>
           );
         })}
-      </MasonryGrid>
+      </MasonryLayout>
     </MainContainer>
   );
 };

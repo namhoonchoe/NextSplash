@@ -12,8 +12,6 @@ const CenterBox = chakra(Flex, {
   baseStyle: {
     justifyContent: "center",
     alignItems: "center",
-    marginBottom:"3vh",
-    breakInside:"avoid"
   },
 });
 

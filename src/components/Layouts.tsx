@@ -1,4 +1,4 @@
-import { chakra, Flex, Grid } from '@chakra-ui/react'
+import { chakra, Flex, Box } from '@chakra-ui/react'
 
 export const ScreenLayout = chakra(Flex,{
   baseStyle:{
@@ -9,14 +9,19 @@ export const ScreenLayout = chakra(Flex,{
   }
 })
 
-export const MasonryGrid = chakra(Grid,{
+
+export const MasonryLayout = chakra(Box,{
   baseStyle:{
+    marginX:"auto",
+    padding:4,
     width:"100%",
-    gridTemplateColumns:"repeat(auto-fill, 16rem)",
-    gridTemplateRows:"masonry",
-    columnGap:"6",
-    rowGap:"6",
-    justifyItems:"center",
-    alignItems:"start"
-  }
+  },
 })
+
+export const MasonryItem = chakra(Box, {
+  baseStyle: {
+    display: "inline-block",
+    marginBottom: "3vh",
+    breakInside: "avoid",
+  },
+});

@@ -7,7 +7,9 @@ export default function LandingContainer() {
     data: randomPhotos,
     isError,
     isLoading,
-  } = useQuery<any>("randomPhotos", getRandomPhotos);
+  } = useQuery<any>("randomPhotos", getRandomPhotos,{
+    staleTime: 1800 * 1000 
+  }) ;
 
   return (
     <LandingPresenter
