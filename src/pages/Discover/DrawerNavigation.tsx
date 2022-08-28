@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import {
   Drawer,
   DrawerBody,
@@ -7,24 +7,26 @@ import {
   DrawerContent,
   DrawerCloseButton,
   IconButton,
-  Button,
   useDisclosure,
   chakra,
   Grid,
   Flex,
   Text,
-  SimpleGrid,
 } from "@chakra-ui/react";
-import { useQuery } from "react-query";
 import { ArrowIcon } from "@components/SvgIcons";
-import { getTopicList } from "@libs/unsplash";
+import { useSetRecoilState } from "recoil";
+import { topicInfoState } from "@libs/recoil-atoms"
 
 interface ITopicCardProps {
   topicTitle: string;
   topicDescription: string;
   imageUrl?: string;
   topicId: string;
-  changeTopicInfo?: any;
+  changeTopic?: any;
+}
+
+interface NavigationProps {
+  topics:Array<ITopic>
 }
 
 const TopicCardContainer = chakra(Flex, {
@@ -64,9 +66,11 @@ const TopicCardGrid = chakra(Grid, {
   },
 });
 
-const TopicCard: React.FC<ITopicCardProps> = ({ topicTitle, imageUrl }) => {
+const TopicCard: React.FC<ITopicCardProps> = ({ topicTitle, imageUrl, topicId, changeTopic }) => {
   return (
-    <TopicCardContainer backgroundImage={`url(${imageUrl})`} >
+    <TopicCardContainer backgroundImage={`url(${imageUrl})`} onClick={() => changeTopic({
+      topicId
+    })} >
       <TopicTitleContainer>
         <Text color={"white"} fontWeight={"semibold"} fontSize={"md"}> {topicTitle}</Text>
       </TopicTitleContainer>
@@ -74,15 +78,12 @@ const TopicCard: React.FC<ITopicCardProps> = ({ topicTitle, imageUrl }) => {
   );
 };
 
-const DrawerNavigation = () => {
+const DrawerNavigation:React.FC<NavigationProps> = ({topics}) => {
+  const changeTopic = useSetRecoilState(topicInfoState)
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef() as any;
 
-  const {
-    data: topics,
-    error,
-    isLoading,
-  } = useQuery<any>("topics", getTopicList);
+
 
   return (
     <>
@@ -115,7 +116,7 @@ const DrawerNavigation = () => {
                     topicDescription={topic.description}
                     topicTitle={topic.title}
                     topicId={topic.id}
-                    //changeTopicInfo={changeTopicInfo}
+                    changeTopic={changeTopic}
                     imageUrl={topic.cover_photo.urls.regular}
                   />
                 );

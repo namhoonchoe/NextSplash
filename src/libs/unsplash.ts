@@ -18,6 +18,15 @@ export const getRandomPhotos = async () => {
   return data;
 };
 
+export const getTopic = async (topicId: string) => {
+  const { data } = await unsplashApi.get(`topics/${topicId}`, {
+    params: {
+      id_or_slug: topicId,
+    },
+  });
+  return data;
+};
+
 export const getTopicList = async () => {
   const { data } = await unsplashApi.get("topics", {
     params: {
@@ -28,22 +37,28 @@ export const getTopicList = async () => {
   return data;
 };
 
-export const getRelatedPhotos = async (topicIds: Array<string>) =>
-  await unsplashApi.get("photos/random", {
+export const getRelatedPhotos = async (topicIds: Array<string>) => {
+  const { data } = await unsplashApi.get("photos/random", {
     params: {
       count: 15,
-      topicIds: topicIds,
+      topic_ids: topicIds,
       featured: true,
     },
-  });
+  })
+  return data;
 
-export const getTopicPhotos = async (topicId: string) =>
-  await unsplashApi.get(`topics/${topicId}/photos`, {
+}
+
+export const getTopicPhotos = async (topicId: string) => {
+  const { data } = await unsplashApi.get(`topics/${topicId}/photos`, {
     params: {
-      topicIdOrSlug: topicId,
-      perPage: 20,
+      id_or_slug: topicId,
+      per_page: 20,
     },
-  });
+  })
+  return data;
+}
+
 
 interface ISearchQuery {
   query: string;
