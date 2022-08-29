@@ -1,4 +1,3 @@
-import SearchContainer from "./SearchContainer";
+import SearchPhotos from "./SearchPhotos";
 
-
-export default SearchContainer
+export default SearchPhotos

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function DetailPresenter() {
+export default function PhotoPresenter() {
   return (
     <div>DetailPresenter</div>
   )

@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Flex,
   chakra,
-  Tooltip,
   Fade,
   SlideFade,
-  useOutsideClick,
   useDisclosure,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { useSetRecoilState, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
+import { searchQueryState } from '@libs/recoil-atoms'
+import { useRouter } from "next/router";
 import { SearchIcon, CloseIcon } from "./SvgIcons";
+
 
 const SearchLayout = chakra(Flex, {
   baseStyle: {
@@ -76,15 +77,16 @@ const NavigationContainer = chakra(Flex, {
     justifyContent: "center",
     borderRadius: "xl",
     mt: 5,
+    backgroundColor:"gray.200"
   },
 });
 
 
 export default function SearchInput() {
   const [keyword, setKeyword] = useState<string>("");
-  /* const [searchTerm, setSearchTerm] = useRecoilState(searchQueryState);
-  const redirectionValue = useSetRecoilState(redirectionState); */
-
+  const [searchTerm, setSearchTerm] = useRecoilState(searchQueryState);
+  const [redirect, setRedirect] = useState<boolean>(false)
+  const router = useRouter()
   const { onOpen, onClose, isOpen } = useDisclosure();
 
   const changeHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -92,22 +94,40 @@ export default function SearchInput() {
     setKeyword(e.currentTarget.value);
   };
 
-  const handleSubmit = (e:React.FormEvent<HTMLInputElement>) => {
+  const redirectHandler = () => {
+    setSearchTerm({ ...searchTerm, query: keyword });
+    setKeyword("");
+    setRedirect(true)
+  }
+
+  
+  const handleSubmit = (e:any) => {
     e.preventDefault();
     if (keyword !== "") {
-      //     setSearchTerm({ ...searchTerm, query: keyword });
-      setKeyword("");
+      redirectHandler()
     } else {
       alert("enter search keyword");
     }
   };
+
+  useEffect(() => {
+    if(redirect){
+      router.push("./Search")
+    }
+    
+    return () => {
+      setRedirect(false)
+    }
+  }, [redirect])
+  
+
 
   return (
     <SearchLayout>
       {isOpen ? (
         <SearchContainer
         >
-          <SearchForm onSubmit={() => handleSubmit}>
+          <SearchForm onSubmit={handleSubmit}>
             <InputBox
               value={keyword}
               onChange={changeHandler}

@@ -3,7 +3,6 @@ import { chakra, Flex } from "@chakra-ui/react";
 import { MasonryItem } from "@components/Layouts";
 import MasonryLayout from "@components/MasonryLayout";
 import ImageCard from "@components/ImageCard";
-import { Interface } from "readline";
 
 const MainContainer = chakra(Flex, {
   baseStyle: {

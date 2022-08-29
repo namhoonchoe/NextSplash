@@ -22,8 +22,6 @@ const DiscoverLayout: React.FC = () => {
   const [topicId, setTopicId] = useState<string>("BJJMtteDJA4");
   const { topicId:selectedId }  = useRecoilValue(topicInfoState);
 
-
-
   const {
     data: topicPhotos,
     isError,
