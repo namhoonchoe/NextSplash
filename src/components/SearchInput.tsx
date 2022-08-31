@@ -33,7 +33,7 @@ const SearchContainer = chakra(Flex, {
     justifyContent: "center",
     alignItems: "start",
     position: "absolute",
-    top: 3,
+    top: 2,
     left: 2,
     right: 2,
   },
@@ -76,7 +76,9 @@ const NavigationContainer = chakra(Flex, {
     alignItems: "start",
     justifyContent: "center",
     borderRadius: "xl",
-    mt: 5,
+    position:"absolute",
+    top:12,
+    left:-2,
     backgroundColor:"gray.200"
   },
 });

@@ -18,6 +18,17 @@ export const getRandomPhotos = async () => {
   return data;
 };
 
+
+export const getPhoto = async (id:string) => {
+  const { data } = await unsplashApi.get(`photos/${id}`, {
+    params: {
+      count: 20,
+      featured: true,
+    },
+  });
+  return data;
+}
+
 export const getTopic = async (topicId: string) => {
   const { data } = await unsplashApi.get(`topics/${topicId}`, {
     params: {
@@ -36,18 +47,6 @@ export const getTopicList = async () => {
   });
   return data;
 };
-
-export const getRelatedPhotos = async (topicIds: Array<string>) => {
-  const { data } = await unsplashApi.get("photos/random", {
-    params: {
-      count: 15,
-      topic_ids: topicIds,
-      featured: true,
-    },
-  })
-  return data;
-
-}
 
 export const getTopicPhotos = async (topicId: string) => {
   const { data } = await unsplashApi.get(`topics/${topicId}/photos`, {
@@ -69,7 +68,7 @@ interface ISearchQuery {
 
 export const searchPhotos = async (queryObject: ISearchQuery) => {
   const { query, orientation, color, orderBy } = queryObject;
-  await unsplashApi.get("search/photos", {
+  const { data: { results } } = await unsplashApi.get("search/photos", {
     params: {
       query,
       orientation,
@@ -77,23 +76,29 @@ export const searchPhotos = async (queryObject: ISearchQuery) => {
       orderBy,
     },
   });
+
+  return results
 };
 
-export const searchCollections = async (query: string) =>
-  await unsplashApi.get("search/collections", {
+export const searchCollections = async (query: string) => {
+  const { data: { results } } = await unsplashApi.get("search/collections", {
     params: {
       query,
     },
   });
+  return results
+}
 
 export const getCollection = async (id: string) => {
-  await unsplashApi.get(`collections/${id}`, { params: { collectionId: id } });
+  const { data } = await unsplashApi.get(`collections/${id}`, { params: { collectionId: id } });
+  return data
 };
 
 export const getCollectionPhotos = async (id: string) => {
-  await unsplashApi.get(`/collections/${id}/photos`, {
+  const { data } = await unsplashApi.get(`/collections/${id}/photos`, {
     params: {
       collectionId: id,
     },
   });
+  return data
 };

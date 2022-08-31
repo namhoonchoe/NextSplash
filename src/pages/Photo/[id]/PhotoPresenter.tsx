@@ -1,7 +1,10 @@
 import React from 'react'
 
-export default function PhotoPresenter() {
+
+const PhotoPresenter:React.FC= () => {
   return (
-    <div>DetailPresenter</div>
-  )
+<p>pHOTO</p>    )
 }
+
+
+export default PhotoPresenter

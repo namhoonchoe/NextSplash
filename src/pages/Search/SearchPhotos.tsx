@@ -1,8 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
+import type { ReactElement } from "react";
+import { useQuery } from "react-query";
 import { chakra, Flex, Text } from "@chakra-ui/react";
 import SearchHeader from "./SearchHeader";
+import { searchPhotos } from "@libs/unsplash";
 import { searchQueryState } from "@libs/recoil-atoms";
 import { useRecoilValue } from "recoil";
+import { MasonryItem } from "@components/Layouts";
+import MasonryLayout from "@components/MasonryLayout";
+import ImageCard from "@components/ImageCard";
 
 const SearchTitle = chakra(Flex, {
   baseStyle: {
@@ -13,9 +19,17 @@ const SearchTitle = chakra(Flex, {
   },
 });
 
-const SearchPhotos = () => {
-  const { query } = useRecoilValue(searchQueryState);
- 
+export default function SearchPhotos() {
+  const searchQuery = useRecoilValue(searchQueryState);
+  const { query } = searchQuery;
+  const {
+    data: photos,
+    isError,
+    isLoading,
+  } = useQuery<Array<any>>(["searchPhotos", searchQuery], () =>
+    searchPhotos({ ...searchQuery })
+  );
+
   return (
     <Flex
       flexDirection={"column"}
@@ -34,9 +48,23 @@ const SearchPhotos = () => {
         </Text>
       </SearchTitle>
       <SearchHeader />
-      <section className="w-full h-screen border-2"></section>
+      <MasonryLayout>
+        {photos?.map((photo: any) => {
+          return (
+            <MasonryItem key={photo.id}>
+              <ImageCard
+                width={photo.width}
+                height={photo.height}
+                source={photo.urls.regular}
+              />
+            </MasonryItem>
+          );
+        })}
+      </MasonryLayout>
     </Flex>
   );
-};
+}
 
-export default SearchPhotos;
+SearchPhotos.getLayout = function PageLayout(page: ReactElement) {
+  return <>{page}</>;
+};

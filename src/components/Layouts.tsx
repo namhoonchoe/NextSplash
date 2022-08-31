@@ -1,4 +1,4 @@
-import { chakra, Flex, Box } from '@chakra-ui/react'
+import { chakra, Flex, Box, Grid } from '@chakra-ui/react'
 
 export const ScreenLayout = chakra(Flex,{
   baseStyle:{
@@ -9,7 +9,13 @@ export const ScreenLayout = chakra(Flex,{
   }
 })
 
-
+export const ResponsiveGrid = chakra(Grid,{
+  baseStyle:{
+    gridTemplateColumns:"repeat(3, 1fr)",
+    columnGap:"5vw",
+    rowGap:"5vh"
+  }
+}) 
 
 
 export const MasonryItem = chakra(Box, {

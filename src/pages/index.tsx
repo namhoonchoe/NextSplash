@@ -1,7 +1,8 @@
-import type { NextPage } from "next";
+import type { ReactElement } from "react";
+import type { NextPageWithLayout } from "./_app";
 import Landing from "./Landing";
 
-const Home: NextPage = () => {
+const Home: NextPageWithLayout = () => {
   return (
     <>
       <Landing />
@@ -9,4 +10,7 @@ const Home: NextPage = () => {
   );
 };
 
+
 export default Home;
+
+
