@@ -8,6 +8,22 @@ const unsplashApi: AxiosInstance = axios.create({
   },
 });
 
+
+
+
+export const getEditorials = async () => {
+  const { data } = await unsplashApi.get("photos", {
+    params: {
+      per_page: 20,
+      order_by: "popular",
+    },
+  });
+  return data;
+};
+
+
+
+
 export const getRandomPhotos = async () => {
   const { data } = await unsplashApi.get("photos/random", {
     params: {

@@ -33,7 +33,7 @@ const SearchContainer = chakra(Flex, {
     justifyContent: "center",
     alignItems: "start",
     position: "absolute",
-    top: 2,
+    top: 3,
     left: 2,
     right: 2,
   },
@@ -77,7 +77,9 @@ const NavigationContainer = chakra(Flex, {
     justifyContent: "center",
     borderRadius: "xl",
     position:"absolute",
-    top:12,
+    py:4,
+    px:3,
+    top:14,
     left:-2,
     backgroundColor:"gray.200"
   },
@@ -148,11 +150,6 @@ export default function SearchInput() {
               <Flex>
                 <Link href="/Search">
                   <a>search</a>
-                </Link>
-              </Flex>
-              <Flex>
-                <Link href="/Discover">
-                  <a>discover</a>
                 </Link>
               </Flex>
             </Fade>

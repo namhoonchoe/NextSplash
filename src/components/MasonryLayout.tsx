@@ -12,7 +12,7 @@ const MasonryLayout: React.FC<childComponent> = ({ children }) => {
   useEffect(() => {
     const checkInitialCount = () => {
       if (isLargerThan1280) {
-        setColumnCount(5);
+        setColumnCount(4);
       } else {
         setColumnCount(3);
       }
@@ -33,7 +33,7 @@ const MasonryLayout: React.FC<childComponent> = ({ children }) => {
   useEffect(() => {
     const checkColumns = () => {
       if (isLargerThan1280) {
-        return setColumnCount(5);
+        return setColumnCount(4);
       } else {
         return setColumnCount(3);
       }
