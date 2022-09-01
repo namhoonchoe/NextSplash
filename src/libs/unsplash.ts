@@ -38,11 +38,10 @@ export const getRandomPhotos = async () => {
 export const getPhoto = async (id:string) => {
   const { data } = await unsplashApi.get(`photos/${id}`, {
     params: {
-      count: 20,
-      featured: true,
+      id: id,
     },
   });
-  return data;
+  return data
 }
 
 export const getTopic = async (topicId: string) => {

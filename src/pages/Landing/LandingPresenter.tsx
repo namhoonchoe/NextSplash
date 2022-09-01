@@ -2,10 +2,23 @@ import React from "react";
 import { MasonryItem } from "@components/Layouts";
 import ImageCard from "@components/ImageCard";
 import MasonryLayout from "@components/MasonryLayout";
-import { chakra, Flex, Text } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { topicInfoState } from "@libs/recoil-atoms"
+import {
+  chakra,
+  Flex,
+  Text,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from "@chakra-ui/react";
+import { topicInfoState } from "@libs/recoil-atoms";
 import { useSetRecoilState } from "recoil";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import Photo from "../Photo/[id]";
 
 interface ILandingProps {
   homeFeeds: any;
@@ -39,21 +52,21 @@ const TopicLayout = chakra(Flex, {
     height: "10vh",
     alignItems: "center",
     justifyContent: "start",
-    overflowX:"scroll",
-    overflowY:"hidden"
+    overflowX: "scroll",
+    overflowY: "hidden",
   },
 });
 
 const TopicContainer = chakra(Flex, {
   baseStyle: {
-    flexWrap:"nowrap",
+    flexWrap: "nowrap",
     marginX: "2%",
-    minWidth:"10vw",
-    height:"80%",
+    minWidth: "10vw",
+    height: "80%",
     borderRadius: "lg",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor:"gray.200"
+    backgroundColor: "gray.200",
   },
 });
 
@@ -63,46 +76,62 @@ const LandingPresenter: React.FC<ILandingProps> = ({
   error,
   topics,
 }) => {
+  const changeTopic = useSetRecoilState(topicInfoState);
   const router = useRouter();
-  const goToDetail = (id: string) => {
-    router.push(`/Photo/${id}`);
+  const goDiscover = (topicId: string) => {
+    changeTopic({ topicId });
   };
-
-  const changeTopic = useSetRecoilState(topicInfoState)
-
-  const goDiscover = (topicId:string) => {
-    changeTopic({topicId})
-    router.push("/Discover")
-  }
 
   return (
     <MainContainer>
+      <Modal
+        isOpen={!!router.query.id}
+        onClose={() => {
+          router.push("/");
+        }}
+      >
+        <ModalOverlay/>
+        <Photo />
+      </Modal>
+
       <NavigationContainer>
         <Text>Editorial</Text>
-        <TopicLayout sx={{
+        <TopicLayout
+          sx={{
             "&::-webkit-scrollbar": {
               display: "none",
             },
-          }}>
+          }}
+        >
           {topics?.map((topic: any) => {
             return (
-              <TopicContainer key={topic.id} onClick={() => goDiscover(topic.id)}>
-                <Text fontSize={"sm"} textOverflow={"ellipsis"}>{topic.title}</Text>
-              </TopicContainer>
-            )
+              <Link key={topic.id} href="/Discover">
+                <TopicContainer
+                  key={topic.id}
+                  onClick={() => goDiscover(topic.id)}
+                >
+                  <Text fontSize={"sm"} textOverflow={"ellipsis"}>
+                    {topic.title}
+                  </Text>
+                </TopicContainer>
+              </Link>
+            );
           })}
         </TopicLayout>
       </NavigationContainer>
       <MasonryLayout>
         {homeFeeds?.map((photo: any) => {
           return (
-            <MasonryItem key={photo.id} onClick={() => goToDetail(photo.id)}>
-              <ImageCard
-                width={photo.width}
-                height={photo.height}
-                source={photo.urls.regular}
-              />
-            </MasonryItem>
+            <Link key={photo.id} href={`/?id=${photo.id}`} as={`/Photo/${photo.id}`} 
+            >
+              <MasonryItem>
+                <ImageCard
+                  width={photo.width}
+                  height={photo.height}
+                  source={photo.urls.regular}
+                />
+              </MasonryItem>
+            </Link>
           );
         })}
       </MasonryLayout>

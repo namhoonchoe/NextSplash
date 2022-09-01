@@ -401,3 +401,37 @@ interface IProfileInfo {
   downloads: number;
   meta: IMeta;
 }
+
+interface IPhoto {
+  id: string;
+  created_at: string;
+  updated_at: string;
+  promoted_at: string;
+  width: number;
+  height: number;
+  width: number;
+  height: number;
+  color: string;
+  blur_hash: string;
+  description: string;
+  alt_description: string;
+  urls: IUrls;
+  links: ILinks;
+  categories: Array<any>;
+  likes: number;
+  liked_by_user: boolean;
+  current_user_collections: any[];
+  sponsorship: any;
+  topic_submissions: any;
+  user: IUser;
+  tags: Array<ITag>;
+  exif: IExif;
+  location: ILocation;
+  meta: IMeta;
+  public_domain: boolean;
+  tags_preview: Array<any>;
+  related_collections: any;
+  views: number;
+  downloads: number;
+  topics: Array<any>;
+}
