@@ -1,10 +1,13 @@
 import React from "react";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Text, Fade } from "@chakra-ui/react";
 import Link from "next/link";
 import SearchFilter from "./SearchFilter";
 import { PhotoIcon, CollectionIcon } from "@components/SvgIcons";
+import { useRouter } from "next/router";
 
 export default function SearchHeader() {
+  const { pathname } = useRouter();
+
   return (
     <Flex
       padding={"1%"}
@@ -21,10 +24,20 @@ export default function SearchHeader() {
               alignItems={"center"}
               paddingLeft={2}
             >
-              <PhotoIcon width={"32px"} height={"32px"} fill={"#9ca3af"} />
-              <Text color={"gray.200"} fontWeight={"semibold"} marginLeft={1}>
-                Photos
-              </Text>
+              {pathname.includes("Collection") ? (
+                <PhotoIcon width={"32px"} height={"32px"} fill={"#9ca3af"} />
+              ) : (
+                <PhotoIcon width={"32px"} height={"32px"} fill={"#4A5568"} />
+              )}
+              {pathname.includes("Collection") ? (
+                <Text color={"gray.200"} fontWeight={"semibold"} marginLeft={1}>
+                  Photos
+                </Text>
+              ) : (
+                <Text color={"gray.700"} fontWeight={"semibold"} marginLeft={1}>
+                  Photos
+                </Text>
+              )}
             </Flex>
           </a>
         </Link>
@@ -35,14 +48,26 @@ export default function SearchHeader() {
             paddingLeft={2}
             marginLeft={2}
           >
-            <CollectionIcon width={"32px"} height={"32px"} fill={"#9ca3af"} />
-            <Text color={"gray.200"} fontWeight={"semibold"} marginLeft={1}>
-              Collections
-            </Text>
+            {pathname.includes("Collection") ? (
+              <CollectionIcon width={"32px"} height={"32px"} fill={"#4A5568"} />
+            ) : (
+              <CollectionIcon width={"32px"} height={"32px"} fill={"#9ca3af"} />
+            )}
+            {pathname.includes("Collection") ? (
+              <Text color={"gray.700"} fontWeight={"semibold"} marginLeft={1}>
+                Collections
+              </Text>
+            ) : (
+              <Text color={"gray.200"} fontWeight={"semibold"} marginLeft={1}>
+                Collections
+              </Text>
+            )}
           </Flex>
         </Link>
       </Flex>
-      <SearchFilter />
+      <Fade in={!pathname.includes("Collection")}>
+        <SearchFilter />
+      </Fade>
     </Flex>
   );
 }

@@ -1,13 +1,14 @@
 import React from "react";
-import { Flex, chakra, Text } from "@chakra-ui/react";
+import { Flex, chakra, Text, Image } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { getPhoto } from "@libs/unsplash";
+import ImageCard from "./ImageCard";
 
 interface IPhotoDetail {
-  id:string | string[] | undefined
+  id: string | string[] | undefined;
 }
 
- const PhotoDetail:React.FC<IPhotoDetail> = ({id}) => {
+const PhotoDetail: React.FC<IPhotoDetail> = ({ id }) => {
   const {
     data: photo,
     isError,
@@ -19,33 +20,64 @@ interface IPhotoDetail {
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "start",
-      width: "100vw",
+      width: "32rem",
+      borderRadius: "md",
+      backgroundColor: "white",
     },
   });
 
-  const DetailMainLayout = chakra(Flex, {
+  const DetailHeader = chakra(Flex, {
     baseStyle: {
-      width: "80%",
+      width: "100%",
+      height: "10vh",
+      justifyContent: "start",
+      alignItems: "center",
+      paddingX: "3%",
+      borderBottom: "1px",
+      borderColor: "gray.300",
+    },
+  });
+
+  const DetailFooter = chakra(Flex, {
+    baseStyle: {
+      width: "100%",
       justifyContent: "start",
       alignItems: "start",
     },
   });
 
-  const RelatedCollectionContainer = chakra(Flex, {
-    baseStyle: {
-      paddingX: "2%",
-      justifyContent: "start",
-      alignItems: "center",
-    },
-  });
   return (
-    <PhotoDetailLayout>
-      <DetailMainLayout>
-       
-      </DetailMainLayout>
-      <RelatedCollectionContainer></RelatedCollectionContainer>
-    </PhotoDetailLayout>
-  );
-}
+    <>
+      {isLoading && <p>Loading....</p>}
 
-export default PhotoDetail
+      {photo && (
+        <PhotoDetailLayout>
+          <DetailHeader>
+            <Image
+              src={`${photo.user.profile_image.medium}`}
+              alt="Profile Image"
+              rounded={"full"}
+              width={"3rem"}
+              height={"3rem"}
+              mr={3}
+              boxShadow={"md"}
+            />
+            <Text fontWeight={"semi-bold"} fontSize={"md"}>
+              {photo.user.name}
+            </Text>
+          </DetailHeader>
+          <ImageCard
+            width={photo.width}
+            height={photo.height}
+            source={photo.urls.regular}
+            componentWidthRem={32}
+            borderRadius={"none"}
+          />
+          <DetailFooter></DetailFooter>
+        </PhotoDetailLayout>
+      )}
+    </>
+  );
+};
+
+export default PhotoDetail;

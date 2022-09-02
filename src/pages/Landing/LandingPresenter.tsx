@@ -2,18 +2,8 @@ import React from "react";
 import { MasonryItem } from "@components/Layouts";
 import ImageCard from "@components/ImageCard";
 import MasonryLayout from "@components/MasonryLayout";
-import {
-  chakra,
-  Flex,
-  Text,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-} from "@chakra-ui/react";
+import PopupModal from "@components/PopupModal";
+import { chakra, Flex, Text } from "@chakra-ui/react";
 import { topicInfoState } from "@libs/recoil-atoms";
 import { useSetRecoilState } from "recoil";
 import Link from "next/link";
@@ -84,15 +74,14 @@ const LandingPresenter: React.FC<ILandingProps> = ({
 
   return (
     <MainContainer>
-      <Modal
+      <PopupModal
         isOpen={!!router.query.id}
         onClose={() => {
           router.push("/");
         }}
       >
-        <ModalOverlay/>
         <Photo />
-      </Modal>
+      </PopupModal>
 
       <NavigationContainer>
         <Text>Editorial</Text>
@@ -122,7 +111,11 @@ const LandingPresenter: React.FC<ILandingProps> = ({
       <MasonryLayout>
         {homeFeeds?.map((photo: any) => {
           return (
-            <Link key={photo.id} href={`/?id=${photo.id}`} as={`/Photo/${photo.id}`}  >
+            <Link
+              key={photo.id}
+              href={`/?id=${photo.id}`}
+              as={`/Photo/${photo.id}`}
+            >
               <MasonryItem>
                 <ImageCard
                   width={photo.width}

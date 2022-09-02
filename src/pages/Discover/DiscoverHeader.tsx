@@ -26,7 +26,7 @@ const DiscoverHeader: React.FC<IHeaderProps> = ({
   return (
     <HeaderContainer>
       <Text fontSize={'3xl'} fontWeight={"medium"} >{topicTitle}</Text>
-      <Flex width={"100%"} height={"10vh"} mt={3} flexDirection={"column"} alignItems={"start"} justifyContent={"start"} >
+      <Flex width={"80%"} height={"10vh"} mt={3} flexDirection={"column"} alignItems={"start"} justifyContent={"start"} >
         <p className="italic text-gray-500	">{topicDescription}</p>
       </Flex>
     </HeaderContainer>

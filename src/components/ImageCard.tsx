@@ -5,7 +5,8 @@ interface IImageProps {
   width:number
   height:number
   source:string
-  componentWidth?:string
+  componentWidthRem?:number
+  borderRadius?:string
 }
 
 const CenterBox = chakra(Flex, {
@@ -16,11 +17,11 @@ const CenterBox = chakra(Flex, {
 });
 
 
-const ImageCard:React.FC<IImageProps> = ({ width, height, source ,componentWidth = '16rem'}) =>  {
+const ImageCard:React.FC<IImageProps> = ({ width, height, source , componentWidthRem = 16, borderRadius="lg" }) =>  {
   const ratio = Math.round((height / width)*100)/100
   return (
-    <CenterBox width={componentWidth} height={`${16*ratio}rem`}>
-      <Image src={source} width={"100%"}  height={"100%"} alt="cannot load image" borderRadius={"lg"} display={"inline-block"}/>
+    <CenterBox width={`${componentWidthRem}rem`} height={`${componentWidthRem*ratio}rem`}>
+      <Image src={source} width={"100%"}  height={"100%"} alt="cannot load image" borderRadius={borderRadius} display={"inline-block"}/>
     </CenterBox>
   )
 }

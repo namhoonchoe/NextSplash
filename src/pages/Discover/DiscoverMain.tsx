@@ -1,14 +1,9 @@
 import React from "react";
-import { chakra, Flex, Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton } from "@chakra-ui/react";
+import { chakra, Flex } from "@chakra-ui/react";
 import { MasonryItem } from "@components/Layouts";
 import MasonryLayout from "@components/MasonryLayout";
 import ImageCard from "@components/ImageCard";
+import PopupModal from "@components/PopupModal";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Photo from "../Photo/[id]";
@@ -21,45 +16,44 @@ const MainContainer = chakra(Flex, {
   },
 });
 
-
 interface IMainProps {
-  topicPhotos:Array<ITopicPhoto>
+  topicPhotos: Array<ITopicPhoto>;
 }
 
-const DiscoverMain:React.FC<IMainProps> = ({topicPhotos}) => {
+const DiscoverMain: React.FC<IMainProps> = ({ topicPhotos }) => {
   const router = useRouter();
-
 
   return (
     <MainContainer>
-      <Modal
+      <PopupModal
         isOpen={!!router.query.id}
         onClose={() => {
-          router.push("/");
+          router.push("/Discover");
         }}
       >
-        <ModalOverlay/>
         <Photo />
-      </Modal>
+      </PopupModal>
       <MasonryLayout>
         {topicPhotos?.map((topicPhoto: any) => {
           return (
-            <Link key={topicPhoto.id} href={`/Discover/?id=${topicPhoto.id}`} as={`/Photo/${topicPhoto.id}`} 
+            <Link
+              key={topicPhoto.id}
+              href={`/Discover/?id=${topicPhoto.id}`}
+              as={`/Photo/${topicPhoto.id}`}
             >
-            <MasonryItem key={topicPhoto.id}>
-              <ImageCard
-                width={topicPhoto.width}
-                height={topicPhoto.height}
-                source={topicPhoto.urls.regular}
-              />
-            </MasonryItem>
+              <MasonryItem key={topicPhoto.id}>
+                <ImageCard
+                  width={topicPhoto.width}
+                  height={topicPhoto.height}
+                  source={topicPhoto.urls.regular}
+                />
+              </MasonryItem>
             </Link>
-
           );
         })}
       </MasonryLayout>
     </MainContainer>
   );
-}
+};
 
-export default DiscoverMain
+export default DiscoverMain;

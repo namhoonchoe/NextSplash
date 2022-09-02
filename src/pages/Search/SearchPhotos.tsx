@@ -1,13 +1,7 @@
 import React from "react";
 import type { ReactElement } from "react";
 import { useQuery } from "react-query";
-import { chakra, Flex, Text,  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,} from "@chakra-ui/react";
+import { chakra, Flex, Text } from "@chakra-ui/react";
 import SearchHeader from "./SearchHeader";
 import { searchPhotos } from "@libs/unsplash";
 import { searchQueryState } from "@libs/recoil-atoms";
@@ -15,6 +9,8 @@ import { useRecoilValue } from "recoil";
 import { MasonryItem } from "@components/Layouts";
 import MasonryLayout from "@components/MasonryLayout";
 import ImageCard from "@components/ImageCard";
+import PopupModal from "@components/PopupModal";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Photo from "../Photo/[id]";
@@ -25,7 +21,7 @@ const SearchTitle = chakra(Flex, {
     alignItems: "center",
     width: "100%",
     height: "10vh",
-    padding:"1%"
+    padding: "1%",
   },
 });
 
@@ -49,15 +45,15 @@ export default function SearchPhotos() {
       alignItems={"center"}
       width={"90%"}
     >
-     <Modal
+      <PopupModal
         isOpen={!!router.query.id}
         onClose={() => {
-          router.push("/");
+          router.push("/Search");
         }}
       >
-        <ModalOverlay/>
         <Photo />
-      </Modal>
+      </PopupModal>
+
       <SearchHeader />
       <SearchTitle>
         <Text
@@ -71,20 +67,23 @@ export default function SearchPhotos() {
       </SearchTitle>
       <MasonryLayout>
         {photos?.map((photo: any) => {
-          return ( 
-          <Link key={photo.id} href={`/Search/?id=${photo.id}`} as={`/Photo/${photo.id}`} >
-            <MasonryItem key={photo.id}>
-              <ImageCard
-                width={photo.width}
-                height={photo.height}
-                source={photo.urls.regular}
-              />
-            </MasonryItem>     
-          </Link>
+          return (
+            <Link
+              key={photo.id}
+              href={`/Search/?id=${photo.id}`}
+              as={`/Photo/${photo.id}`}
+            >
+              <MasonryItem key={photo.id}>
+                <ImageCard
+                  width={photo.width}
+                  height={photo.height}
+                  source={photo.urls.regular}
+                />
+              </MasonryItem>
+            </Link>
           );
         })}
       </MasonryLayout>
     </Flex>
   );
 }
-

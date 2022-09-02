@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, chakra } from "@chakra-ui/react";
+import { Flex, chakra, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import SearchInput from "./SearchInput";
 
@@ -23,13 +23,14 @@ const HomeButton = chakra(Flex, {
   },
 });
 
-
 const Header: React.FC = () => {
   return (
     <HeaderLayout>
       <HomeButton>
         <Link href="/">
-          <a>NextSplash</a>
+          <a>
+            <Text fontSize={"xl"} fontWeight={"semibold"} as={"i"}>Next Splash</Text>
+          </a>
         </Link>
       </HomeButton>
       <SearchInput />
