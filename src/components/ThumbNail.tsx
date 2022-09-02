@@ -19,6 +19,15 @@ const ThumbNailContainer = chakra(Grid, {
   },
 });
 
+const ImageContainer = chakra(GridItem, {
+  baseStyle: {
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    border:"1px",
+    borderColor: "white",
+  },
+});
+
 const ThumbNails: React.FC<IThumbNailProps> = ({
   sourceOne,
   sourceTwo,
@@ -26,32 +35,24 @@ const ThumbNails: React.FC<IThumbNailProps> = ({
 }) => {
   return (
     <ThumbNailContainer>
-      <GridItem
+      <ImageContainer
         rowSpan={2}
         colSpan={2}
         backgroundImage={`url(${sourceOne})`}
-        backgroundSize={"cover"}
-        backgroundPosition={"center"}
-        borderColor={"white"}
         borderLeftRadius={"md"}
       />
-      <GridItem
+      <ImageContainer
         rowSpan={1}
         colSpan={1}
         backgroundImage={`url(${sourceTwo})`}
-        backgroundSize={"cover"}
-        backgroundPosition={"center"}
-        borderColor={"white"}
         borderTopRightRadius={"md"}
       />
 
-      <GridItem
+      <ImageContainer
         rowSpan={1}
         colSpan={1}
         borderColor={"white"}
         borderBottomRightRadius={"md"}
-        backgroundSize={"cover"}
-        backgroundPosition={"center"}
         backgroundImage={`url(${sourceThree})`}
       />
     </ThumbNailContainer>

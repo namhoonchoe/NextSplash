@@ -116,7 +116,7 @@ export default function SearchInput() {
 
   useEffect(() => {
     if(redirect){
-      router.push("./Search")
+      router.replace("./Search")
     }
     
     return () => {

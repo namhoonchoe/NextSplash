@@ -25,7 +25,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <QueryClientProvider client={queryClient}>
         <ChakraProvider>
           <RecoilRoot>
-            <Component {...pageProps} />
+            <ScreenLayout>
+              <Component {...pageProps} />
+            </ScreenLayout>
           </RecoilRoot>
         </ChakraProvider>
         <ReactQueryDevtools initialIsOpen={false} />

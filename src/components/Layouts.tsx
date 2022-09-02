@@ -11,9 +11,11 @@ export const ScreenLayout = chakra(Flex,{
 
 export const ResponsiveGrid = chakra(Grid,{
   baseStyle:{
-    gridTemplateColumns:"repeat(3, 1fr)",
-    columnGap:"5vw",
-    rowGap:"5vh"
+    width:"100%",
+    gridTemplateColumns:"repeat(auto-fill, minmax(20rem, 1fr))",
+    columnGap:"2%",
+    rowGap:"2%",
+
   }
 }) 
 

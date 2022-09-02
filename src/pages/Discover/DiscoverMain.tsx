@@ -1,8 +1,17 @@
 import React from "react";
-import { chakra, Flex } from "@chakra-ui/react";
+import { chakra, Flex, Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton } from "@chakra-ui/react";
 import { MasonryItem } from "@components/Layouts";
 import MasonryLayout from "@components/MasonryLayout";
 import ImageCard from "@components/ImageCard";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import Photo from "../Photo/[id]";
 
 const MainContainer = chakra(Flex, {
   baseStyle: {
@@ -18,13 +27,25 @@ interface IMainProps {
 }
 
 const DiscoverMain:React.FC<IMainProps> = ({topicPhotos}) => {
-  
+  const router = useRouter();
+
 
   return (
     <MainContainer>
+      <Modal
+        isOpen={!!router.query.id}
+        onClose={() => {
+          router.push("/");
+        }}
+      >
+        <ModalOverlay/>
+        <Photo />
+      </Modal>
       <MasonryLayout>
         {topicPhotos?.map((topicPhoto: any) => {
           return (
+            <Link key={topicPhoto.id} href={`/Discover/?id=${topicPhoto.id}`} as={`/Photo/${topicPhoto.id}`} 
+            >
             <MasonryItem key={topicPhoto.id}>
               <ImageCard
                 width={topicPhoto.width}
@@ -32,6 +53,8 @@ const DiscoverMain:React.FC<IMainProps> = ({topicPhotos}) => {
                 source={topicPhoto.urls.regular}
               />
             </MasonryItem>
+            </Link>
+
           );
         })}
       </MasonryLayout>

@@ -1,4 +1,5 @@
 import React from 'react'
+import type { ReactElement } from "react";
 import { useRouter } from 'next/router'
 import { useQuery } from "react-query";
 import { getCollection, getCollectionPhotos } from "@libs/unsplash";
@@ -20,3 +21,9 @@ export default function CollectionContainer() {
   )
 }
 
+
+CollectionContainer.getLayout = function PageLayout(page: ReactElement) {
+  return (
+      {page}
+  );
+};

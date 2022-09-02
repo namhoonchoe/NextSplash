@@ -15,6 +15,8 @@ const SearchTitle = chakra(Flex, {
     alignItems: "center",
     width: "100%",
     height: "15vh",
+    padding:"1%"
+
   },
 });
 
@@ -39,17 +41,18 @@ export default function CollectionLayout() {
       alignItems={"center"}
       width={"90vw"}
     >
+     
+      <SearchHeader />
       <SearchTitle>
         <Text
           fontWeight={"semibold"}
-          fontSize={"md"}
+          fontSize={"2xl"}
           color={"gray.800"}
           casing={"capitalize"}
         >
           {query}
         </Text>
       </SearchTitle>
-      <SearchHeader />
       <ResponsiveGrid>
         {collections?.map((collection) => {
           return (
@@ -120,7 +123,3 @@ export default function CollectionLayout() {
     </Flex>
   );
 }
-
-CollectionLayout.getLayout = function PageLayout(page: ReactElement) {
-  return <>{page}</>;
-};

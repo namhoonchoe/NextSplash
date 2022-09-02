@@ -122,8 +122,7 @@ const LandingPresenter: React.FC<ILandingProps> = ({
       <MasonryLayout>
         {homeFeeds?.map((photo: any) => {
           return (
-            <Link key={photo.id} href={`/?id=${photo.id}`} as={`/Photo/${photo.id}`} 
-            >
+            <Link key={photo.id} href={`/?id=${photo.id}`} as={`/Photo/${photo.id}`}  >
               <MasonryItem>
                 <ImageCard
                   width={photo.width}
