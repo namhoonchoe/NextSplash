@@ -42,7 +42,7 @@ const SearchContainer = chakra(Flex, {
 const SearchIconContainer = chakra(Flex, {
   baseStyle: {
     width: "100%",
-    height: "5rem",
+    height: "4rem",
     justifyContent: "center",
     alignItems: "center",
     focus: "outline-none",

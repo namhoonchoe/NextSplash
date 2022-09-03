@@ -41,7 +41,6 @@ export default function CollectionLayout() {
       alignItems={"center"}
       width={"90vw"}
     >
-     
       <SearchHeader />
       <SearchTitle>
         <Text

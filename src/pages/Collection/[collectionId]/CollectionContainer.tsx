@@ -3,21 +3,21 @@ import type { ReactElement } from "react";
 import { useRouter } from 'next/router'
 import { useQuery } from "react-query";
 import { getCollection, getCollectionPhotos } from "@libs/unsplash";
-
+import CollectionPresenter from './CollectionPresenter';
 
 export default function CollectionContainer() {
   const router = useRouter()
-  const { id } = router.query
+  const { collectionId } = router.query
   const {
     data: collection,
     isError,
     isLoading,
-  } = useQuery<any>("collection", () => getCollection(id as string)) ;
+  } = useQuery<any>("collection", () => getCollection(collectionId as string)) ;
   const {
     data: collectionPhotos
-  } = useQuery<any>("collectionPhotos", () => getCollectionPhotos(id as string)) ;
+  } = useQuery<any>("collectionPhotos", () => getCollectionPhotos(collectionId as string)) ;
   return (
-    <div>CollectionContainer</div>
+    <CollectionPresenter  collection={collection} collectionPhotos={collectionPhotos} isLoading={isLoading} error={isError}/>
   )
 }
 

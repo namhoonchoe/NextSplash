@@ -26,7 +26,6 @@ const DiscoverMain: React.FC<IMainProps> = ({ topicPhotos }) => {
   return (
     <MainContainer>
       <PopupModal
-        isOpen={!!router.query.id}
         onClose={() => {
           router.push("/Discover");
         }}

@@ -1,5 +1,4 @@
 import React from "react";
-import type { ReactElement } from "react";
 import { useQuery } from "react-query";
 import { chakra, Flex, Text } from "@chakra-ui/react";
 import SearchHeader from "./SearchHeader";
@@ -46,7 +45,6 @@ export default function SearchPhotos() {
       width={"90%"}
     >
       <PopupModal
-        isOpen={!!router.query.id}
         onClose={() => {
           router.push("/Search");
         }}

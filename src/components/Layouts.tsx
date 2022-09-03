@@ -5,7 +5,8 @@ export const ScreenLayout = chakra(Flex,{
     width:"100vw",
     flexDirection:"column",
     justifyContent:"start",
-    alignItems:"center"
+    alignItems:"center",
+    position:"relative"
   }
 })
 

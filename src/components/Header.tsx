@@ -6,11 +6,14 @@ import SearchInput from "./SearchInput";
 const HeaderLayout = chakra(Flex, {
   baseStyle: {
     width: "94%",
-    height: "6vh",
+    height: "9vh",
+    paddingY:"1%",
     justifyContent: "center",
     alignItems: "center",
-    margin: "1%",
-    position: "relative",
+    position: "sticky",
+    backgroundColor:"white",
+    top:0,
+    zIndex:"10"
   },
 });
 
