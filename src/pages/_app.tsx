@@ -1,12 +1,11 @@
 import type { ReactElement, ReactNode } from "react";
 import type { AppProps } from "next/app";
 import type { NextPage } from "next";
-
 import { ChakraProvider } from "@chakra-ui/react";
 import { RecoilRoot } from "recoil";
 import Header from "@components/Header";
 import { ScreenLayout } from "@components/Layouts";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -23,29 +22,34 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   if (Component.getLayout) {
     return (
       <QueryClientProvider client={queryClient}>
-        <ChakraProvider>
-          <RecoilRoot>
-            <ScreenLayout>
-              <Component {...pageProps} />
-            </ScreenLayout>
-          </RecoilRoot>
-        </ChakraProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
+        <Hydrate state={pageProps.dehydratedState}>
+          <ChakraProvider>
+            <RecoilRoot>
+              <ScreenLayout>
+                <Component {...pageProps} />
+              </ScreenLayout>
+            </RecoilRoot>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </ChakraProvider>
+        </Hydrate>
+
       </QueryClientProvider>
     );
   }
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider>
-        <RecoilRoot>
-          <ScreenLayout>
-            <Header />
-            <Component {...pageProps} />
-          </ScreenLayout>
-        </RecoilRoot>
-      </ChakraProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <Hydrate state={pageProps.dehydratedState}>
+        <ChakraProvider>
+          <RecoilRoot>
+            <ScreenLayout>
+              <Header />
+              <Component {...pageProps} />
+            </ScreenLayout>
+          </RecoilRoot>
+        </ChakraProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </Hydrate>
     </QueryClientProvider>
   );
 }

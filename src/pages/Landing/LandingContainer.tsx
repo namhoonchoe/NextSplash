@@ -1,6 +1,21 @@
 import LandingPresenter from "./LandingPresenter";
-import { useQuery } from "react-query";
+import { dehydrate, QueryClient, useQuery } from "react-query";
 import { getEditorials, getTopicList } from "@libs/unsplash";
+
+export async function getStaticProps() {
+  const queryClient = new QueryClient()
+
+  await queryClient.prefetchQuery(['Editorials'], getEditorials,{
+    staleTime: 1800 * 1000 
+  })
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  }
+}
+
 
 export default function LandingContainer() {
   const {

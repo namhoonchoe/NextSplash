@@ -75,7 +75,6 @@ const LandingPresenter: React.FC<ILandingProps> = ({
   return (
     <MainContainer>
       <PopupModal
-        isOpen={!!router.query.id}
         onClose={() => {
           router.push("/");
         }}
