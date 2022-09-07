@@ -13,16 +13,8 @@ const SearchTitle = chakra(Flex, {
     justifyContent: "start",
     alignItems: "center",
     width: "90%",
-    height: "15vh",
+    height: "8rem",
     padding: "1%",
-  },
-});
-
-const PageLayout = chakra(Flex, {
-  baseStyle: {
-    flexDirection: "column",
-    width: "90%",
-    alignItems: "start",
   },
 });
 
@@ -47,9 +39,7 @@ export default function CollectionLayout() {
   }
 
   return (
-    <ColumnLayout
-    
-    >
+    <ColumnLayout>
       <SearchHeader />
       <SearchTitle>
         <Text

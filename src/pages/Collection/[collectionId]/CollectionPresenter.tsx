@@ -53,7 +53,7 @@ const HeaderContainer = chakra(Flex, {
 const UserContainer = chakra(Flex, {
   baseStyle: {
     width: "40%",
-    height: "10vh",
+    height: "5rem",
     mt: "1%",
     justifyContent: "start",
     alignItems: "center",

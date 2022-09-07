@@ -37,7 +37,12 @@ interface IColorOption {
 
 const ColorOption: React.FC<IColorOption> = ({ colorName, colorCode }) => {
   return (
-    <Flex justify={"start"} alignItems={"center"} width={"100%"} height={"10vh"}>
+    <Flex
+      justify={"start"}
+      alignItems={"center"}
+      width={"100%"}
+      height={"8rem"}
+    >
       <Box
         rounded={"full"}
         backgroundColor={colorCode}
@@ -103,6 +108,7 @@ const SearchFilter = () => {
                 <Text fontWeight={"semibold"}>Orientation</Text>
               )}
               <Select
+                
                 placeholder="Select Orientation"
                 onChange={(event) => setOrientation(event.target.value)}
               >
@@ -136,7 +142,7 @@ const SearchFilter = () => {
               ) : (
                 <p className="font-semibold">Color</p>
               )}
-              <Menu  size={"md"}>
+              <Menu size={"md"}>
                 <MenuButton
                   as={Button}
                   rightIcon={<ExpendMoreIcon />}
@@ -144,7 +150,7 @@ const SearchFilter = () => {
                 >
                   Select Color
                 </MenuButton>
-                <MenuList overflowY={"scroll"} height={"40vh"}>
+                <MenuList overflowY={"scroll"} height={"10rem"}>
                   <MenuOptionGroup
                     onChange={(value) => setColor(value as string)}
                   >
@@ -152,10 +158,16 @@ const SearchFilter = () => {
                       Black & White
                     </MenuItemOption>
                     <MenuItemOption value="black">
-                      <ColorOption colorName={"Black"} colorCode={"blackAlpha.900"} />
+                      <ColorOption
+                        colorName={"Black"}
+                        colorCode={"blackAlpha.900"}
+                      />
                     </MenuItemOption>
                     <MenuItemOption value="white">
-                      <ColorOption colorName={"White"} colorCode={"whiteAlpha.900"} />
+                      <ColorOption
+                        colorName={"White"}
+                        colorCode={"whiteAlpha.900"}
+                      />
                     </MenuItemOption>
 
                     <MenuItemOption value="yellow">
@@ -180,10 +192,7 @@ const SearchFilter = () => {
                       />
                     </MenuItemOption>
                     <MenuItemOption value="magenta">
-                      <ColorOption
-                        colorName={"White"}
-                        colorCode={"pink.300"}
-                      />
+                      <ColorOption colorName={"White"} colorCode={"pink.300"} />
                     </MenuItemOption>
                     <MenuItemOption value="green">
                       <ColorOption
@@ -192,16 +201,10 @@ const SearchFilter = () => {
                       />
                     </MenuItemOption>
                     <MenuItemOption value="teal">
-                      <ColorOption
-                        colorName={"Teal"}
-                        colorCode={"teal.500	"}
-                      />
+                      <ColorOption colorName={"Teal"} colorCode={"teal.500	"} />
                     </MenuItemOption>
                     <MenuItemOption value="blue">
-                      <ColorOption
-                        colorName={"Blue"}
-                        colorCode={"blue.600"}
-                      />
+                      <ColorOption colorName={"Blue"} colorCode={"blue.600"} />
                     </MenuItemOption>
                   </MenuOptionGroup>
                 </MenuList>

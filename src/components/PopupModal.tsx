@@ -1,30 +1,20 @@
 import React from "react";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent
-} from "@chakra-ui/react";
+import { Modal, ModalOverlay, ModalContent } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 interface IModalProps {
-  onClose: () => void
+  onClose: () => void;
   children: React.ReactNode;
 }
 
-const PopupModal:React.FC<IModalProps> = ({ onClose, children }) => {
+const PopupModal: React.FC<IModalProps> = ({ onClose, children }) => {
   const router = useRouter();
-  const { id } = router.query
+  const { id } = router.query;
 
   return (
-    <Modal
-      isOpen={!!id}
-      onClose={onClose}
-      isCentered={true}
-    >
+    <Modal isOpen={!!id} onClose={onClose} isCentered={true}>
       <ModalOverlay />
-      <ModalContent width={"32rem"} maxHeight={"80vh"}>
-      {children}
-      </ModalContent>
+      <ModalContent>{children}</ModalContent>
     </Modal>
   );
 };

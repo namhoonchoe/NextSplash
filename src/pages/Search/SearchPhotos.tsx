@@ -19,7 +19,7 @@ const SearchTitle = chakra(Flex, {
     justifyContent: "start",
     alignItems: "center",
     width: "90%",
-    height: "10vh",
+    height: "8rem",
     padding: "1%",
   },
 });

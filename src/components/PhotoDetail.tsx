@@ -31,7 +31,8 @@ const PhotoDetail: React.FC<IPhotoDetail> = ({ id }) => {
   const DetailHeader = chakra(Flex, {
     baseStyle: {
       width: "100%",
-      height: "10vh",
+      height:"5rem",
+      minHeight: "5rem",
       justifyContent: "start",
       alignItems: "center",
       paddingX: "3%",

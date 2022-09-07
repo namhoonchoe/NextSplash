@@ -33,8 +33,8 @@ const TopicCardContainer = chakra(Flex, {
   baseStyle: {
     justifyContent: "center",
     alignItems: "center",
-    width: "12vw",
-    height: "16vh",
+    width: "12rem",
+    height: "8rem",
     borderRadius: "lg",
     backgroundPosition:"center",
     backgroundRepeat:"no-repeat",
@@ -61,8 +61,8 @@ const TopicCardGrid = chakra(Grid, {
     width: "100%",
     gridTemplateColumns:"repeat(2, 1fr)",
     justifyContent:"center",
-    rowGap:"2vh",
-    columnGap:"1vw"
+    rowGap:"1rem",
+    columnGap:"1rem"
   },
 });
 

@@ -26,7 +26,8 @@ import Link from "next/link";
 const HeaderLayout = chakra(Flex, {
   baseStyle: {
     width: "90%",
-    height: "10vh",
+    maxWidth:"1428px",
+    height: "8rem",
     alignItems: "center",
     justifyContent: "start",
   },
@@ -43,7 +44,8 @@ const HeaderText = chakra(Text, {
 const NavigationContainer = chakra(Flex, {
   baseStyle: {
     width: "80vw",
-    height: "10vh",
+    maxWidth:"1280px",
+    height: "8rem",
     padding: "1%",
     alignItems: "center",
     justifyContent: "start",
@@ -54,7 +56,7 @@ const NavigationContainer = chakra(Flex, {
 const TopicLayout = chakra(Flex, {
   baseStyle: {
     width: "100%",
-    height: "10vh",
+    height: "5rem",
     alignItems: "center",
     justifyContent: "start",
     overflowX: "scroll",
@@ -67,7 +69,7 @@ const TopicContainer = chakra(Flex, {
   baseStyle: {
     flexWrap: "nowrap",
     marginX: "1%",
-    minWidth: "10vw",
+    minWidth: "8rem",
     height: "80%",
     borderRadius: "xl",
     alignItems: "center",
@@ -81,7 +83,7 @@ const ButtonWrapper = chakra(Flex, {
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    height: "10vh",
+    height: "8rem",
     position: "absolute",
     top: 0,
     left: 0,
@@ -92,7 +94,7 @@ const ButtonWrapper = chakra(Flex, {
 const SliderButton = chakra(IconButton, {
   baseStyle: {
     color: "gray.700",
-    height: "10vh",
+    height: "5rem",
     backgroundColor: "white",
     transition: "0.4s",
     zIndex: 30,
@@ -147,7 +149,7 @@ const NavigationHeader: React.FC<INavigationProps> = ({ topics }) => {
       <Flex
         alignItems={"center"}
         justifyContent={"center"}
-        height={"10vh"}
+        height={"5rem"}
         width={"10%"}
       >
         <Menu isLazy>

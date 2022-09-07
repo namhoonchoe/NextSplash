@@ -62,7 +62,7 @@ const DiscoverHeader: React.FC<IHeaderProps> = ({
           {topicTitle}
         </Text>
         <Flex
-          width={"80%"}
+          width={"50%"}
           height={"10vh"}
           mt={3}
           flexDirection={"column"}

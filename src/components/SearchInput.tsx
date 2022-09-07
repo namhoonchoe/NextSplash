@@ -15,7 +15,8 @@ import { SearchIcon, CloseIcon } from "./SvgIcons";
 const SearchLayout = chakra(Flex, {
   baseStyle: {
     width: "50%",
-    height: "8vh",
+    maxWidth:"800px",
+    height: "4rem",
     justifyContent: "start",
     alignItems: "center",
     backgroundColor: "gray.300",
