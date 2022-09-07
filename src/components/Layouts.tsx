@@ -1,22 +1,43 @@
 import { chakra, Flex, Box, Grid } from '@chakra-ui/react'
 
-export const ScreenLayout = chakra(Flex,{
+export const CenterBenchMark = chakra(Box,{
   baseStyle:{
     width:"100vw",
-    flexDirection:"column",
-    justifyContent:"start",
-    alignItems:"center",
     position:"relative"
   }
 })
 
-export const ResponsiveGrid = chakra(Grid,{
+export const ScreenLayout = chakra(Flex,{
   baseStyle:{
     width:"100%",
-    gridTemplateColumns:"repeat(auto-fill, minmax(20rem, 1fr))",
-    columnGap:"2%",
-    rowGap:"2%",
+    maxWidth:"1582px",
+    flexDirection:"column",
+    justifyContent:"start",
+    alignItems:"center",
+    position:"absolute",
+    top:0,
+    left:0,
+    right:0,
+    marginX:"auto",
+  }
+})
 
+export const ColumnLayout = chakra(Flex,{
+  baseStyle:{
+    width:"100%",
+    flexDirection:"column",
+    justifyContent:"start",
+    alignItems:"center",
+  }
+})
+
+
+export const ResponsiveGrid = chakra(Grid,{
+  baseStyle:{
+    width:"90%",
+    gridTemplateColumns:"repeat(auto-fill, minmax(18rem, 1fr))",
+    columnGap:"2rem",
+    rowGap:"2rem",
   }
 }) 
 
@@ -24,7 +45,9 @@ export const ResponsiveGrid = chakra(Grid,{
 export const MasonryItem = chakra(Box, {
   baseStyle: {
     display: "inline-block",
-    marginBottom: "3vh",
+    marginBottom: "1.5rem",
+    marginRight:"1.5rem",
     breakInside: "avoid",
+    _hover:{filter: "brightness(65%)"}
   },
 });

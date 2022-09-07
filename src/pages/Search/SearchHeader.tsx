@@ -11,7 +11,7 @@ export default function SearchHeader() {
   return (
     <Flex
       padding={"1%"}
-      width={"100%"}
+      width={"90%"}
       justifyContent={"start"}
       alignItems={"center"}
       position={"relative"}

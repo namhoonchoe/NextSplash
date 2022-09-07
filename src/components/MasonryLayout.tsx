@@ -7,19 +7,19 @@ type childComponent = {
 
 const MasonryLayout: React.FC<childComponent> = ({ children }) => {
   const [columnCount, setColumnCount] = useState<number>(0);
-  const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
+  const [isLargerThan1440] = useMediaQuery("(min-width: 1440px)");
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
   const [isLargerThan640] = useMediaQuery("(min-width:  640px)");
   
   useEffect(() => {
     const checkColumns = () => {
-      if (isLargerThan1280) {
+      if (isLargerThan1440) {
         setColumnCount(5);
       } 
-      if (isLargerThan1024 && isLargerThan1280 === false ) {
+      if (isLargerThan1024 && isLargerThan1440 === false ) {
         setColumnCount(4);
       }
-      if (isLargerThan640 && isLargerThan1024 === false && isLargerThan1280 === false) {
+      if (isLargerThan640 && isLargerThan1024 === false && isLargerThan1440 === false) {
         setColumnCount(3);
       }
     };
@@ -30,17 +30,17 @@ const MasonryLayout: React.FC<childComponent> = ({ children }) => {
       window.removeEventListener("resize", checkColumns);
       console.log(columnCount);
     };
-  }, [columnCount,isLargerThan1280,isLargerThan1024,isLargerThan640]);
+  }, [columnCount,isLargerThan1440,isLargerThan1024,isLargerThan640]);
 
   useEffect(() => {
     const checkInitialCount = () => {
-      if (isLargerThan1280) {
+      if (isLargerThan1440) {
         setColumnCount(5);
       } 
-      if (isLargerThan1024 && isLargerThan1280 === false ) {
+      if (isLargerThan1024 && isLargerThan1440 === false ) {
         setColumnCount(4);
       }
-      if (isLargerThan640 && isLargerThan1024 === false && isLargerThan1280 === false) {
+      if (isLargerThan640 && isLargerThan1024 === false && isLargerThan1440 === false) {
         setColumnCount(3);
       }
     };
@@ -55,7 +55,7 @@ const MasonryLayout: React.FC<childComponent> = ({ children }) => {
       mounted = false;
       console.log(columnCount);
     };
-  }, [columnCount,isLargerThan1280,isLargerThan1024,isLargerThan640]);
+  }, [columnCount,isLargerThan1440,isLargerThan1024,isLargerThan640]);
 
  
 
@@ -63,7 +63,7 @@ const MasonryLayout: React.FC<childComponent> = ({ children }) => {
     <Box
       marginX={"auto"}
       padding={4}
-      width={"100%"}
+      width={"90%"}
       sx={{ columnCount: columnCount, columnGap: "2%" }}
     >
       {children}

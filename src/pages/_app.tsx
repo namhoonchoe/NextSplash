@@ -4,7 +4,7 @@ import type { NextPage } from "next";
 import { ChakraProvider } from "@chakra-ui/react";
 import { RecoilRoot } from "recoil";
 import Header from "@components/Header";
-import { ScreenLayout } from "@components/Layouts";
+import { ScreenLayout, CenterBenchMark } from "@components/Layouts";
 import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
@@ -25,6 +25,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <Hydrate state={pageProps.dehydratedState}>
           <ChakraProvider>
             <RecoilRoot>
+              <CenterBenchMark />
               <ScreenLayout>
                 <Component {...pageProps} />
               </ScreenLayout>
@@ -32,7 +33,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
             <ReactQueryDevtools initialIsOpen={false} />
           </ChakraProvider>
         </Hydrate>
-
       </QueryClientProvider>
     );
   }
@@ -42,6 +42,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <Hydrate state={pageProps.dehydratedState}>
         <ChakraProvider>
           <RecoilRoot>
+            <CenterBenchMark />
             <ScreenLayout>
               <Header />
               <Component {...pageProps} />

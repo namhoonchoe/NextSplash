@@ -5,8 +5,8 @@ import ThumbNail from "@components/ThumbNail";
 const CardLayout = chakra(Flex, {
   baseStyle: {
     flexDirection: "column",
-    width: "20rem",
-    height: "18rem",
+    width: "18rem",
+    height: "20rem",
     justifySelf: "center",
   },
 });
@@ -39,7 +39,11 @@ const TagContainer = chakra(Flex, {
   },
 });
 
-const CollectionCard: React.FC<any> = ({ collection }) => {
+interface ICollectionCardProp {
+  collection:any
+}
+
+const CollectionCard: React.FC<ICollectionCardProp> = ({ collection }) => {
   return (
     <CardLayout key={collection.id}>
       <ThumbNail
@@ -52,10 +56,10 @@ const CollectionCard: React.FC<any> = ({ collection }) => {
           {collection.title}
         </Text>
         <UserInfo>
-          <p>{collection.total_photos}</p>
-          <p className="mx-1"> Photos</p>
-          <p className="mr-1 text-xs">Curated by</p>
-          <p className=" font-semibold">{collection.user.name}</p>
+          <Text  fontSize={"sm"}>{collection.total_photos}</Text>
+          <Text mx={1} fontSize={"sm"} > Photos</Text>
+          <Text mr={1} fontSize={"xs"}>Curated by</Text>
+          <Text fontWeight={"semibold"}  fontSize={"sm"}>{collection.user.name}</Text>
         </UserInfo>
         <TagContainer>
           {collection.tags.slice(3).map((tag: any) => {
@@ -67,7 +71,7 @@ const CollectionCard: React.FC<any> = ({ collection }) => {
                 mr={1}
                 px={1}
               >
-                <Text fontSize={"sm"} p={1}>
+                <Text fontSize={"sm"} fontWeight={"semibold"} p={1}>
                   {tag.title}
                 </Text>
               </Box>

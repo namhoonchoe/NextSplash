@@ -5,7 +5,7 @@ import SearchHeader from "./SearchHeader";
 import { searchPhotos } from "@libs/unsplash";
 import { searchQueryState } from "@libs/recoil-atoms";
 import { useRecoilValue } from "recoil";
-import { MasonryItem } from "@components/Layouts";
+import { MasonryItem, ColumnLayout } from "@components/Layouts";
 import MasonryLayout from "@components/MasonryLayout";
 import ImageCard from "@components/ImageCard";
 import PopupModal from "@components/PopupModal";
@@ -18,7 +18,7 @@ const SearchTitle = chakra(Flex, {
   baseStyle: {
     justifyContent: "start",
     alignItems: "center",
-    width: "100%",
+    width: "90%",
     height: "10vh",
     padding: "1%",
   },
@@ -33,17 +33,17 @@ export default function SearchPhotos() {
     data: photos,
     isError,
     isLoading,
-  } = useQuery<Array<any>>(["searchPhotos", searchQuery], () =>
-    searchPhotos({ ...searchQuery })
+    error,
+  } = useQuery<Array<any>>(
+    ["searchPhotos", searchQuery],
+    () => searchPhotos({ ...searchQuery }),
+    {
+      keepPreviousData: true,
+    }
   );
 
   return (
-    <Flex
-      flexDirection={"column"}
-      justifyContent={"start"}
-      alignItems={"center"}
-      width={"90%"}
-    >
+    <ColumnLayout>
       <PopupModal
         onClose={() => {
           router.replace("/Search");
@@ -56,11 +56,11 @@ export default function SearchPhotos() {
       <SearchTitle>
         <Text
           fontWeight={"semibold"}
-          fontSize={"2xl"}
+          fontSize={"xl"}
           color={"gray.800"}
           casing={"capitalize"}
         >
-          {query}
+          Search Results for : {query}
         </Text>
       </SearchTitle>
       <MasonryLayout>
@@ -82,6 +82,6 @@ export default function SearchPhotos() {
           );
         })}
       </MasonryLayout>
-    </Flex>
+    </ColumnLayout>
   );
 }

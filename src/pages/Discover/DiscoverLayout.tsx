@@ -59,7 +59,7 @@ const DiscoverLayout: React.FC = () => {
   }, [selectedId, topicId]);
   return (
     <LayoutContainer>
-      <DiscoverHeader topicTitle={topic?.title} topicDescription={topic?.description} />
+      <DiscoverHeader topicTitle={topic?.title} topicDescription={topic?.description} imageUrl={topic?.cover_photo.urls.regular}/>
       <DiscoverMain topicPhotos={topicPhotos} />
       <Box position={"fixed"} right={1} top={"50%"}>
         <DrawerNavigation topics={topics} />

@@ -60,16 +60,7 @@ const UserContainer = chakra(Flex, {
   },
 });
 
-const MainContainer = chakra(Flex, {
-  baseStyle: {
-    width: "90%",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "start",
-    border: "1px",
-    borderColor: "red.400",
-  },
-});
+
 
 const CollectionPresenter: React.FC<ICollectionProps> = ({
   isLoading,
@@ -125,7 +116,6 @@ const CollectionPresenter: React.FC<ICollectionProps> = ({
               {collection.total_photos} Photos
             </Text>
           </HeaderContainer>
-          <MainContainer>
             <MasonryLayout>
               {collectionPhotos?.map((photo: any) => {
                 return (
@@ -144,7 +134,6 @@ const CollectionPresenter: React.FC<ICollectionProps> = ({
                 );
               })}
             </MasonryLayout>
-          </MainContainer>
         </CollectionLayout>
       )}
     </>

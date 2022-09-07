@@ -25,7 +25,7 @@ import Link from "next/link";
 
 const HeaderLayout = chakra(Flex, {
   baseStyle: {
-    width: "100%",
+    width: "90%",
     height: "10vh",
     alignItems: "center",
     justifyContent: "start",
@@ -153,13 +153,13 @@ const NavigationHeader: React.FC<INavigationProps> = ({ topics }) => {
         <Menu isLazy>
           <>
             <MenuButton
-              height={"70%"}
+              size={"xl"}
               isActive={isEditorial}
               as={Button}
               rightIcon={<ChevronDownIcon />}
               backgroundColor={"white"}
             >
-              <HeaderText fontSize={"xl"}>Discover</HeaderText>
+              <HeaderText fontSize={"xl"} p={1}>Discover</HeaderText>
             </MenuButton>
             <MenuList>
               <MenuItem onClick={() => setIsEditorial(true)}>

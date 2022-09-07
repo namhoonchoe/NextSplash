@@ -20,9 +20,9 @@ interface ILandingProps {
 const MainContainer = chakra(Flex, {
   baseStyle: {
     flexDirection: "column",
-    alignItems: "start",
-    justifyContent: "center",
-    width: "90vw",
+    alignItems: "center",
+    justifyContent: "start",
+    width: "100%",
   },
 });
 

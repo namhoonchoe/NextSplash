@@ -12,7 +12,7 @@ const MainContainer = chakra(Flex, {
   baseStyle: {
     alignItems: "start",
     justifyContent: "center",
-    width: "90vw",
+    width: "100%",
   },
 });
 

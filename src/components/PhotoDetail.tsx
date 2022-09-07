@@ -18,11 +18,13 @@ const PhotoDetail: React.FC<IPhotoDetail> = ({ id }) => {
   const PhotoDetailLayout = chakra(Flex, {
     baseStyle: {
       flexDirection: "column",
-      justifyContent: "center",
+      justifyContent: "start",
       alignItems: "start",
       width: "32rem",
+      maxHeight: "80vh",
       borderRadius: "md",
       backgroundColor: "white",
+      overflowY:"scroll"
     },
   });
 
@@ -33,8 +35,17 @@ const PhotoDetail: React.FC<IPhotoDetail> = ({ id }) => {
       justifyContent: "start",
       alignItems: "center",
       paddingX: "3%",
+      paddingY: "1%",
       borderBottom: "1px",
       borderColor: "gray.300",
+    },
+  });
+
+  const DetailBody = chakra(Flex, {
+    baseStyle: {
+      width: "100%",
+      justifyContent: "start",
+      alignItems: "center",
     },
   });
 
@@ -51,7 +62,13 @@ const PhotoDetail: React.FC<IPhotoDetail> = ({ id }) => {
       {isLoading && <p>Loading....</p>}
 
       {photo && (
-        <PhotoDetailLayout>
+        <PhotoDetailLayout
+          sx={{
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+          }}
+        >
           <DetailHeader>
             <Image
               src={`${photo.user.profile_image.medium}`}
@@ -66,13 +83,16 @@ const PhotoDetail: React.FC<IPhotoDetail> = ({ id }) => {
               {photo.user.name}
             </Text>
           </DetailHeader>
-          <ImageCard
-            width={photo.width}
-            height={photo.height}
-            source={photo.urls.regular}
-            componentWidthRem={32}
-            borderRadius={"none"}
-          />
+          <DetailBody>
+            <ImageCard
+              width={photo.width}
+              height={photo.height}
+              source={photo.urls.regular}
+              componentWidthRem={32}
+              borderRadius={"none"}
+            />
+          </DetailBody>
+
           <DetailFooter></DetailFooter>
         </PhotoDetailLayout>
       )}

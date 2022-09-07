@@ -100,6 +100,7 @@ export const searchCollections = async (query: string) => {
   const { data: { results } } = await unsplashApi.get("search/collections", {
     params: {
       query,
+      per_page:20
     },
   });
   return results
@@ -114,6 +115,7 @@ export const getCollectionPhotos = async (id: string) => {
   const { data } = await unsplashApi.get(`/collections/${id}/photos`, {
     params: {
       collectionId: id,
+      per_page:30
     },
   });
   return data

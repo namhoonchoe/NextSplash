@@ -6,7 +6,6 @@ import {
   SlideFade,
   useDisclosure,
 } from "@chakra-ui/react";
-import Link from "next/link";
 import { useRecoilState } from "recoil";
 import { searchQueryState } from '@libs/recoil-atoms'
 import { useRouter } from "next/router";
@@ -15,27 +14,23 @@ import { SearchIcon, CloseIcon } from "./SvgIcons";
 
 const SearchLayout = chakra(Flex, {
   baseStyle: {
-    width: "60%",
-    height: "100%",
+    width: "50%",
+    height: "8vh",
     justifyContent: "start",
     alignItems: "center",
     backgroundColor: "gray.300",
     borderRadius: "xl",
-    padding: "2%",
-    position: "relative",
   },
 });
 
 const SearchContainer = chakra(Flex, {
   baseStyle: {
     width: "100%",
+    height: "90%",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "start",
-    position: "absolute",
-    top: 3,
-    left: 2,
-    right: 2,
+    paddingX:"2%"
   },
 });
 
@@ -45,7 +40,7 @@ const SearchIconContainer = chakra(Flex, {
     height: "4rem",
     justifyContent: "center",
     alignItems: "center",
-    focus: "outline-none",
+    paddingX:"1rem"
   },
 });
 
@@ -65,6 +60,7 @@ const InputBox = chakra("input", {
     width: "100%",
     height: "100%",
     backgroundColor: "gray.300",
+    outline:"none"
   },
 });
 
@@ -105,15 +101,14 @@ export default function SearchInput() {
     return () => {
       setRedirect(false)
     }
-  }, [redirect])
+  }, [redirect,router])
   
 
 
   return (
     <SearchLayout>
       {isOpen ? (
-        <SearchContainer
-        >
+        <SearchContainer>
           <SearchForm onSubmit={handleSubmit}>
             <InputBox
               value={keyword}
@@ -128,7 +123,6 @@ export default function SearchInput() {
               <CloseIcon />
             </Flex>
           </SearchForm>
-          
         </SearchContainer>
       ) : (
         <SlideFade in={!isOpen}>

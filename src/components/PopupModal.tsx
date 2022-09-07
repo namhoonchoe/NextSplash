@@ -22,7 +22,7 @@ const PopupModal:React.FC<IModalProps> = ({ onClose, children }) => {
       isCentered={true}
     >
       <ModalOverlay />
-      <ModalContent width={"32rem"}>
+      <ModalContent width={"32rem"} maxHeight={"80vh"}>
       {children}
       </ModalContent>
     </Modal>
