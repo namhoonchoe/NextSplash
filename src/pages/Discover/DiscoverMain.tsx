@@ -27,7 +27,7 @@ const DiscoverMain: React.FC<IMainProps> = ({ topicPhotos }) => {
     <MainContainer>
       <PopupModal
         onClose={() => {
-          router.push("/Discover");
+          router.replace("/Discover");
         }}
       >
         <Photo />

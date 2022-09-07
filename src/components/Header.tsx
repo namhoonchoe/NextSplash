@@ -13,7 +13,7 @@ const HeaderLayout = chakra(Flex, {
     position: "sticky",
     backgroundColor:"white",
     top:0,
-    zIndex:"10"
+    zIndex:100
   },
 });
 

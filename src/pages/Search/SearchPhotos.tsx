@@ -46,7 +46,7 @@ export default function SearchPhotos() {
     >
       <PopupModal
         onClose={() => {
-          router.push("/Search");
+          router.replace("/Search");
         }}
       >
         <Photo />

@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios";
+
 const ApiKey = process.env.NEXT_PUBLIC_UNSPLASH_API_KEY as string;
 
 const unsplashApi: AxiosInstance = axios.create({
@@ -9,15 +10,14 @@ const unsplashApi: AxiosInstance = axios.create({
 });
 
 
-
-
 export const getEditorials = async () => {
   const { data } = await unsplashApi.get("photos", {
     params: {
-      per_page: 20,
+      page:1,
+      per_page: 30,
       order_by: "popular",
-    },
-  });
+    }
+  })
   return data;
 };
 
@@ -67,7 +67,7 @@ export const getTopicPhotos = async (topicId: string) => {
   const { data } = await unsplashApi.get(`topics/${topicId}/photos`, {
     params: {
       id_or_slug: topicId,
-      per_page: 20,
+      per_page: 30,
     },
   })
   return data;
@@ -89,6 +89,7 @@ export const searchPhotos = async (queryObject: ISearchQuery) => {
       orientation,
       color,
       orderBy,
+      per_page: 30
     },
   });
 

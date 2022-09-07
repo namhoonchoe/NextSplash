@@ -68,23 +68,6 @@ const InputBox = chakra("input", {
   },
 });
 
-const NavigationContainer = chakra(Flex, {
-  baseStyle: {
-    width: "100%",
-    height: "10vh",
-    flexDirection: "column",
-    alignItems: "start",
-    justifyContent: "center",
-    borderRadius: "xl",
-    position:"absolute",
-    py:4,
-    px:3,
-    top:14,
-    left:-2,
-    backgroundColor:"gray.200"
-  },
-});
-
 
 export default function SearchInput() {
   const [keyword, setKeyword] = useState<string>("");
@@ -145,15 +128,7 @@ export default function SearchInput() {
               <CloseIcon />
             </Flex>
           </SearchForm>
-          <NavigationContainer>
-            <Fade in={isOpen}>
-              <Flex>
-                <Link href="/Search">
-                  <a>search</a>
-                </Link>
-              </Flex>
-            </Fade>
-          </NavigationContainer>
+          
         </SearchContainer>
       ) : (
         <SlideFade in={!isOpen}>

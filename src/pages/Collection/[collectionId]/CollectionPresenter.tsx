@@ -85,7 +85,7 @@ const CollectionPresenter: React.FC<ICollectionProps> = ({
         <CollectionLayout>
           <PopupModal
             onClose={() => {
-              router.push(`/Collection/${collection.id}`);
+              router.replace(`/Collection/${collection.id}`);
             }}
           >
             <Photo />
