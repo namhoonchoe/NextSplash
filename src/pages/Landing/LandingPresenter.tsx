@@ -3,18 +3,20 @@ import { MasonryItem } from "@components/Layouts";
 import ImageCard from "@components/ImageCard";
 import MasonryLayout from "@components/MasonryLayout";
 import PopupModal from "@components/PopupModal";
+import LoadingSpinner from "@components/LoadingSpinner";
+import Seo from "@components/Seo"
 import { chakra, Flex } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Photo from "../Photo/[id]";
-import NavigationHeader from "./NavigationHeader"
-
+import NavigationHeader from "./NavigationHeader";
 
 interface ILandingProps {
   homeFeeds: any;
   isLoading: boolean;
-  error: boolean;
+  isError: boolean;
   topics: any;
+  feedError?: any;
 }
 
 const MainContainer = chakra(Flex, {
@@ -26,19 +28,22 @@ const MainContainer = chakra(Flex, {
   },
 });
 
-
 const LandingPresenter: React.FC<ILandingProps> = ({
   homeFeeds,
   isLoading,
-  error,
+  isError,
+  feedError,
   topics,
 }) => {
   const router = useRouter();
 
+  if (isLoading) return <LoadingSpinner />;
 
-  
+  if (isError) return <p>Something went wrong: {feedError.message}</p>;
+
   return (
     <MainContainer>
+      <Seo title={"Home"}/>
       <PopupModal
         onClose={() => {
           router.replace("/");
@@ -46,7 +51,7 @@ const LandingPresenter: React.FC<ILandingProps> = ({
       >
         <Photo />
       </PopupModal>
-      <NavigationHeader topics={topics}/>
+      <NavigationHeader topics={topics} />
       <MasonryLayout>
         {homeFeeds?.map((photo: any) => {
           return (

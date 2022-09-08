@@ -9,6 +9,8 @@ import { MasonryItem, ColumnLayout } from "@components/Layouts";
 import MasonryLayout from "@components/MasonryLayout";
 import ImageCard from "@components/ImageCard";
 import PopupModal from "@components/PopupModal";
+import LoadingSpinner from "@components/LoadingSpinner";
+import Seo from "@components/Seo";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -34,16 +36,18 @@ export default function SearchPhotos() {
     isError,
     isLoading,
     error,
-  } = useQuery<Array<any>>(
-    ["searchPhotos", searchQuery],
-    () => searchPhotos({ ...searchQuery }),
-    {
-      keepPreviousData: true,
-    }
+  } = useQuery<Array<any>>(["searchPhotos", searchQuery], () =>
+    searchPhotos({ ...searchQuery })
   );
+  const warning = error as any;
+
+  if (isLoading) return <LoadingSpinner />;
+
+  if (isError) return <p>Something went wrong: {warning.message}</p>;
 
   return (
     <ColumnLayout>
+      <Seo title={"Search"} />
       <PopupModal
         onClose={() => {
           router.replace("/Search");

@@ -6,6 +6,8 @@ import { searchCollections } from "@libs/unsplash";
 import SearchHeader from "../SearchHeader";
 import CollectionCard from "@components/CollectionCard";
 import { ResponsiveGrid, ColumnLayout } from "@components/Layouts";
+import LoadingSpinner from "@components/LoadingSpinner";
+import Seo from "@components/Seo";
 import Link from "next/link";
 
 const SearchTitle = chakra(Flex, {
@@ -30,16 +32,17 @@ export default function CollectionLayout() {
     searchCollections(query)
   );
 
-  if (isLoading) {
-    return <p> Loading....</p>;
-  }
+  const warning = error as any;
 
-  if (isError) {
-    return <p> An error has Occurred </p>;
-  }
+  if (isLoading) return <LoadingSpinner />;
 
+  if (isError) return   <p>Something went wrong: {warning.message}</p>;
+
+
+ 
   return (
     <ColumnLayout>
+          <Seo title={"Search"}/>
       <SearchHeader />
       <SearchTitle>
         <Text

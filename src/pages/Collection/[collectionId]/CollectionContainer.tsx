@@ -12,12 +12,13 @@ export default function CollectionContainer() {
     data: collection,
     isError,
     isLoading,
+    error
   } = useQuery<any>("collection", () => getCollection(collectionId as string)) ;
   const {
     data: collectionPhotos
   } = useQuery<any>("collectionPhotos", () => getCollectionPhotos(collectionId as string)) ;
   return (
-    <CollectionPresenter  collection={collection} collectionPhotos={collectionPhotos} isLoading={isLoading} error={isError}/>
+    <CollectionPresenter  collection={collection} collectionPhotos={collectionPhotos} isLoading={isLoading} isError={isError} error={error}/>
   )
 }
 

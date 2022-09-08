@@ -5,12 +5,16 @@ import { MasonryItem } from "@components/Layouts";
 import ImageCard from "@components/ImageCard";
 import MasonryLayout from "@components/MasonryLayout";
 import PopupModal from "@components/PopupModal";
+import LoadingSpinner from "@components/LoadingSpinner";
+import Seo from "@components/Seo";
+
 import { useRouter } from "next/router";
 import Photo from "../../Photo/[id]";
 
 interface ICollectionProps {
   isLoading: boolean;
-  error: boolean;
+  isError: boolean;
+  error:any
   collection: any;
   collectionPhotos: any;
 }
@@ -64,16 +68,24 @@ const UserContainer = chakra(Flex, {
 
 const CollectionPresenter: React.FC<ICollectionProps> = ({
   isLoading,
+  isError,
   error,
   collection,
   collectionPhotos,
 }) => {
   const router = useRouter();
+  const warning = error as any;
+
+  if (isLoading) return <LoadingSpinner />;
+
+  if (isError) return <p>Something went wrong: {warning.message}</p>;
+
   return (
     <>
       {isLoading && <p>Loading...</p>}
       {collection && (
         <CollectionLayout>
+        <Seo title={"Collection"} />
           <PopupModal
             onClose={() => {
               router.replace(`/Collection/${collection.id}`);

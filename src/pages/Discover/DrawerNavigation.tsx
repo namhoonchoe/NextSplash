@@ -15,7 +15,8 @@ import {
 } from "@chakra-ui/react";
 import { ArrowIcon } from "@components/SvgIcons";
 import { useSetRecoilState } from "recoil";
-import { topicInfoState } from "@libs/recoil-atoms"
+import { topicInfoState } from "@libs/recoil-atoms";
+import LoadingSpinner from "@components/LoadingSpinner";
 
 interface ITopicCardProps {
   topicTitle: string;
@@ -26,7 +27,10 @@ interface ITopicCardProps {
 }
 
 interface NavigationProps {
-  topics:Array<ITopic>
+  topics: Array<ITopic>;
+  isLoading: boolean;
+  isError: boolean;
+  error: any;
 }
 
 const TopicCardContainer = chakra(Flex, {
@@ -36,8 +40,8 @@ const TopicCardContainer = chakra(Flex, {
     width: "12rem",
     height: "8rem",
     borderRadius: "lg",
-    backgroundPosition:"center",
-    backgroundRepeat:"no-repeat",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
   },
 });
@@ -49,42 +53,59 @@ const TopicTitleContainer = chakra(Flex, {
     width: "100%",
     height: "100%",
     rounded: "lg",
-    backdropFilter:"brightness(0.75)",
-    _hover:{
-      backdropFilter:"brightness(1)"
-    }
+    backdropFilter: "brightness(0.75)",
+    _hover: {
+      backdropFilter: "brightness(1)",
+    },
   },
 });
 
 const TopicCardGrid = chakra(Grid, {
   baseStyle: {
     width: "100%",
-    gridTemplateColumns:"repeat(2, 1fr)",
-    justifyContent:"center",
-    rowGap:"1rem",
-    columnGap:"1rem"
+    gridTemplateColumns: "repeat(2, 1fr)",
+    justifyContent: "center",
+    rowGap: "1rem",
+    columnGap: "1rem",
   },
 });
 
-const TopicCard: React.FC<ITopicCardProps> = ({ topicTitle, imageUrl, topicId, changeTopic }) => {
+const TopicCard: React.FC<ITopicCardProps> = ({
+  topicTitle,
+  imageUrl,
+  topicId,
+  changeTopic,
+}) => {
   return (
-    <TopicCardContainer backgroundImage={`url(${imageUrl})`} onClick={() => changeTopic({
-      topicId
-    })} >
+    <TopicCardContainer
+      backgroundImage={`url(${imageUrl})`}
+      onClick={() =>
+        changeTopic({
+          topicId,
+        })
+      }
+    >
       <TopicTitleContainer>
-        <Text color={"white"} fontWeight={"semibold"} fontSize={"md"}> {topicTitle}</Text>
+        <Text color={"white"} fontWeight={"semibold"} fontSize={"md"}>
+          {topicTitle}
+        </Text>
       </TopicTitleContainer>
     </TopicCardContainer>
   );
 };
 
-const DrawerNavigation:React.FC<NavigationProps> = ({topics}) => {
-  const changeTopic = useSetRecoilState(topicInfoState)
+const DrawerNavigation: React.FC<NavigationProps> = ({
+  topics,
+  isLoading,
+  isError,
+  error,
+}) => {
+  const changeTopic = useSetRecoilState(topicInfoState);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef() as any;
+  if (isLoading) return <LoadingSpinner />;
 
-
-
+  if (isError) return <p>Something went wrong: {error.message}</p>;
   return (
     <>
       <IconButton
@@ -108,7 +129,7 @@ const DrawerNavigation:React.FC<NavigationProps> = ({topics}) => {
           <DrawerCloseButton />
           <DrawerHeader>Featured Topics</DrawerHeader>
           <DrawerBody>
-            <TopicCardGrid >
+            <TopicCardGrid>
               {topics?.map((topic: ITopic) => {
                 return (
                   <TopicCard

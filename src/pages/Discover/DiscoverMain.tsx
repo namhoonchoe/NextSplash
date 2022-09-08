@@ -7,6 +7,7 @@ import PopupModal from "@components/PopupModal";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Photo from "../Photo/[id]";
+import LoadingSpinner from "@components/LoadingSpinner";
 
 const MainContainer = chakra(Flex, {
   baseStyle: {
@@ -18,11 +19,18 @@ const MainContainer = chakra(Flex, {
 
 interface IMainProps {
   topicPhotos: Array<ITopicPhoto>;
+  isLoading:boolean
+  isError:boolean
+  error:any
 }
 
-const DiscoverMain: React.FC<IMainProps> = ({ topicPhotos }) => {
+const DiscoverMain: React.FC<IMainProps> = ({ topicPhotos,  isLoading,
+  isError,
+  error, }) => {
   const router = useRouter();
+  if (isLoading) return <LoadingSpinner />;
 
+  if (isError) return <p>Something went wrong: {error.message}</p>;
   return (
     <MainContainer>
       <PopupModal

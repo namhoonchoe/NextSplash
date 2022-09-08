@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 
 const ApiKey = process.env.NEXT_PUBLIC_UNSPLASH_API_KEY as string;
 
-const unsplashApi: AxiosInstance = axios.create({
+ const unsplashApi: AxiosInstance = axios.create({
   baseURL: "https://api.unsplash.com/",
   params: {
     client_id: ApiKey,
