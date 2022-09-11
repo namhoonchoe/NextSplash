@@ -60,6 +60,7 @@ const DiscoverHeader: React.FC<IHeaderProps> = ({
   const markup = () => {
     return { __html: DOMPurify.sanitize(topicDescription) };
   };
+  
   if (isLoading) return <LoadingSpinner />;
 
   if (isError) return <p>Something went wrong: {error.message}</p>;
@@ -72,7 +73,6 @@ const DiscoverHeader: React.FC<IHeaderProps> = ({
         </Text>
         <Flex
           width={"50%"}
-          height={"10vh"}
           mt={3}
           flexDirection={"column"}
           alignItems={"start"}

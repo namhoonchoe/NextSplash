@@ -48,8 +48,8 @@ const CollectionCard: React.FC<ICollectionCardProp> = ({ collection }) => {
     <CardLayout key={collection.id}>
       <ThumbNail
         sourceOne={collection.preview_photos[0].urls.regular}
-        sourceTwo={collection.preview_photos[1].urls.regular}
-        sourceThree={collection.preview_photos[2].urls.regular}
+        sourceTwo={collection.preview_photos[1]?.urls.regular}
+        sourceThree={collection.preview_photos[2]?.urls.regular}
       />
       <InfoContainer>
         <Text color={"gray.600"} fontWeight={"semibold"} casing={"capitalize"}>

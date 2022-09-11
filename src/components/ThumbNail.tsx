@@ -3,8 +3,8 @@ import React from "react";
 
 interface IThumbNailProps {
   sourceOne: string;
-  sourceTwo: string;
-  sourceThree: string;
+  sourceTwo?: string;
+  sourceThree?: string;
 }
 
 const ThumbNailContainer = chakra(Grid, {
@@ -23,7 +23,7 @@ const ImageContainer = chakra(GridItem, {
   baseStyle: {
     backgroundSize: "cover",
     backgroundPosition: "center",
-    border:"1px",
+    border: "1px",
     borderColor: "white",
   },
 });
@@ -44,7 +44,8 @@ const ThumbNails: React.FC<IThumbNailProps> = ({
       <ImageContainer
         rowSpan={1}
         colSpan={1}
-        backgroundImage={`url(${sourceTwo})`}
+        backgroundImage={sourceTwo && `url(${sourceTwo})`}
+        bgGradient="linear(to-b, #A0AEC0, #CBD5E0)"
         borderTopRightRadius={"md"}
       />
 
@@ -52,8 +53,9 @@ const ThumbNails: React.FC<IThumbNailProps> = ({
         rowSpan={1}
         colSpan={1}
         borderColor={"white"}
+        backgroundImage={sourceThree && `url(${sourceThree})`}
+        bgGradient="linear(to-b, #A0AEC0, #CBD5E0)"
         borderBottomRightRadius={"md"}
-        backgroundImage={`url(${sourceThree})`}
       />
     </ThumbNailContainer>
   );

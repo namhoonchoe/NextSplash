@@ -1,6 +1,6 @@
 import LandingPresenter from "./LandingPresenter";
 import { dehydrate, QueryClient, useQuery } from "react-query";
-import { getEditorials, getTopicList } from "@libs/unsplash";
+import { getEditorials } from "@libs/unsplash";
 
 export async function getServerSideProps() {
   const queryClient = new QueryClient();
@@ -21,18 +21,12 @@ export default function LandingContainer() {
     isLoading,
   } = useQuery<any>("Editorials", getEditorials);
 
-  const {
-    data: topics,
-    error: topicsError,
-    isError: isTopicsError,
-    isLoading: isTopicsLoading,
-  } = useQuery<any>("topics", getTopicList);
+
 
   return (
     <LandingPresenter
       homeFeeds={homeFeeds}
       feedError={feedsError}
-      topics={topics}
       isError={isError}
       isLoading={isLoading}
     />

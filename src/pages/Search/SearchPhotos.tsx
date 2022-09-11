@@ -11,7 +11,6 @@ import ImageCard from "@components/ImageCard";
 import PopupModal from "@components/PopupModal";
 import LoadingSpinner from "@components/LoadingSpinner";
 import Seo from "@components/Seo";
-
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Photo from "../Photo/[id]";
@@ -67,25 +66,29 @@ export default function SearchPhotos() {
           Search Results for : {query}
         </Text>
       </SearchTitle>
-      <MasonryLayout>
-        {photos?.map((photo: any) => {
-          return (
-            <Link
-              key={photo.id}
-              href={`/Search/?id=${photo.id}`}
-              as={`/Photo/${photo.id}`}
-            >
-              <MasonryItem key={photo.id}>
-                <ImageCard
-                  width={photo.width}
-                  height={photo.height}
-                  source={photo.urls.regular}
-                />
-              </MasonryItem>
-            </Link>
-          );
-        })}
-      </MasonryLayout>
+      {photos && photos?.length > 0 ? (
+        <MasonryLayout>
+          {photos?.map((photo: any) => {
+            return (
+              <Link
+                key={photo.id}
+                href={`/Search/?id=${photo.id}`}
+                as={`/Photo/${photo.id}`}
+              >
+                <MasonryItem key={photo.id}>
+                  <ImageCard
+                    width={photo.width}
+                    height={photo.height}
+                    source={photo.urls.regular}
+                  />
+                </MasonryItem>
+              </Link>
+            );
+          })}
+        </MasonryLayout>
+      ) : (
+        <Text> No results for: {query}</Text>
+      )}
     </ColumnLayout>
   );
 }

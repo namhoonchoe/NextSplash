@@ -1,9 +1,22 @@
 import React from 'react'
 import type { ReactElement } from "react";
 import { useRouter } from 'next/router'
-import { useQuery } from "react-query";
+import { dehydrate, QueryClient, useQuery } from "react-query";
 import { getCollection, getCollectionPhotos } from "@libs/unsplash";
 import CollectionPresenter from './CollectionPresenter';
+import { GetServerSideProps } from 'next'
+
+export const getServerSideProps:GetServerSideProps = async(context) => {
+  const { collectionId } = context.query 
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(["collectionPhotos"], () => getCollectionPhotos(collectionId));
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
 
 export default function CollectionContainer() {
   const router = useRouter()

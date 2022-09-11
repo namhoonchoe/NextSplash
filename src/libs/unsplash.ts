@@ -35,7 +35,7 @@ export const getRandomPhotos = async () => {
 };
 
 
-export const getPhoto = async (id:string) => {
+export const getPhoto = async (id: string | string[] | undefined) => {
   const { data } = await unsplashApi.get(`photos/${id}`, {
     params: {
       id: id,
@@ -106,12 +106,12 @@ export const searchCollections = async (query: string) => {
   return results
 }
 
-export const getCollection = async (id: string) => {
+export const getCollection = async (id: string | string[] | undefined) => {
   const { data } = await unsplashApi.get(`collections/${id}`, { params: { collectionId: id } });
   return data
 };
 
-export const getCollectionPhotos = async (id: string) => {
+export const getCollectionPhotos = async (id: string | string[] | undefined) => {
   const { data } = await unsplashApi.get(`/collections/${id}/photos`, {
     params: {
       collectionId: id,

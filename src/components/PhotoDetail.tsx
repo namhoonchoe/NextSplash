@@ -1,17 +1,33 @@
 import React from "react";
 import { Flex, chakra, Text, Image } from "@chakra-ui/react";
-import { useQuery } from "react-query";
+import { dehydrate, QueryClient, useQuery } from "react-query";
 import { getPhoto } from "@libs/unsplash";
+import LoadingSpinner from "@components/LoadingSpinner";
 import ImageCard from "./ImageCard";
+import { GetServerSideProps } from 'next'
 
 interface IPhotoDetail {
   id: string | string[] | undefined;
 }
 
+export const getServerSideProps:GetServerSideProps = async(context) => {
+  const { id } = context.query 
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(["photo"], () => getPhoto(id));
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
+
 const PhotoDetail: React.FC<IPhotoDetail> = ({ id }) => {
+  
   const {
     data: photo,
     isError,
+    error,
     isLoading,
   } = useQuery<any>("photo", () => getPhoto(id as string));
 
@@ -57,10 +73,13 @@ const PhotoDetail: React.FC<IPhotoDetail> = ({ id }) => {
       alignItems: "start",
     },
   });
+  const warning = error as any;
 
+  if (isLoading) return <LoadingSpinner />;
+
+  if (isError) return <p>Something went wrong: {warning.message}</p>;
   return (
     <>
-      {isLoading && <p>Loading....</p>}
 
       {photo && (
         <PhotoDetailLayout

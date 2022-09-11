@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from "react";
-import {
-  Flex,
-  chakra,
-  Fade,
-  SlideFade,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Flex, chakra, SlideFade, useDisclosure } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
-import { searchQueryState } from '@libs/recoil-atoms'
+import { searchQueryState } from "@libs/recoil-atoms";
 import { useRouter } from "next/router";
 import { SearchIcon, CloseIcon } from "./SvgIcons";
-
 
 const SearchLayout = chakra(Flex, {
   baseStyle: {
     width: "50%",
-    maxWidth:"800px",
+    maxWidth: "800px",
     height: "4rem",
     justifyContent: "start",
     alignItems: "center",
@@ -31,7 +24,7 @@ const SearchContainer = chakra(Flex, {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "start",
-    paddingX:"2%"
+    paddingX: "2%",
   },
 });
 
@@ -41,7 +34,7 @@ const SearchIconContainer = chakra(Flex, {
     height: "4rem",
     justifyContent: "center",
     alignItems: "center",
-    paddingX:"1rem"
+    paddingX: "1rem",
   },
 });
 
@@ -61,50 +54,53 @@ const InputBox = chakra("input", {
     width: "100%",
     height: "100%",
     backgroundColor: "gray.300",
-    outline:"none"
+    outline: "none",
   },
 });
-
 
 export default function SearchInput() {
   const [keyword, setKeyword] = useState<string>("");
   const [searchTerm, setSearchTerm] = useRecoilState(searchQueryState);
-  const [redirect, setRedirect] = useState<boolean>(false)
-  const router = useRouter()
+  const [redirect, setRedirect] = useState<boolean>(false);
+  const router = useRouter();
   const { onOpen, onClose, isOpen } = useDisclosure();
 
-  const changeHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setKeyword(e.currentTarget.value);
   };
 
   const redirectHandler = () => {
-    setSearchTerm({ ...searchTerm, query: keyword });
-    setKeyword("");
-    setRedirect(true)
-  }
+    let currentPath = router.pathname;
 
-  
-  const handleSubmit = (e:any) => {
+    if (currentPath.includes("Search")) {
+      setSearchTerm({ ...searchTerm, query: keyword });
+      setKeyword("");
+    } else {
+      setSearchTerm({ ...searchTerm, query: keyword });
+      setKeyword("");
+      setRedirect(true);
+    }
+  };
+
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     if (keyword !== "") {
-      redirectHandler()
+      redirectHandler();
     } else {
       alert("enter search keyword");
     }
   };
 
   useEffect(() => {
-    if(redirect){
-      router.replace("./Search")
+    if (redirect) {
+      router.replace("./Search");
     }
-    
-    return () => {
-      setRedirect(false)
-    }
-  }, [redirect,router])
-  
 
+    return () => {
+      setRedirect(false);
+    };
+  }, [redirect, router]);
 
   return (
     <SearchLayout>

@@ -36,13 +36,11 @@ export default function CollectionLayout() {
 
   if (isLoading) return <LoadingSpinner />;
 
-  if (isError) return   <p>Something went wrong: {warning.message}</p>;
+  if (isError) return <p>Something went wrong: {warning.message}</p>;
 
-
- 
   return (
     <ColumnLayout>
-          <Seo title={"Search"}/>
+      <Seo title={"Search"} />
       <SearchHeader />
       <SearchTitle>
         <Text
@@ -54,17 +52,21 @@ export default function CollectionLayout() {
           Search Results for : {query}
         </Text>
       </SearchTitle>
-      <ResponsiveGrid>
-        {collections?.map((collection) => {
-          return (
-            <Link href={`/Collection/${collection.id}`} key={collection.id}>
-              <a>
-                <CollectionCard collection={collection} />
-              </a>
-            </Link>
-          );
-        })}
-      </ResponsiveGrid>
+      {collections && collections?.length > 0 ? (
+        <ResponsiveGrid>
+          {collections?.map((collection) => {
+            return (
+              <Link href={`/Collection/${collection.id}`} key={collection.id}>
+                <a>
+                  <CollectionCard collection={collection} />
+                </a>
+              </Link>
+            );
+          })}
+        </ResponsiveGrid>
+      ) : (
+        <Text> No results for: {query}</Text>
+      )}
     </ColumnLayout>
   );
 }

@@ -10,23 +10,23 @@ import {
   MenuItem,
   Fade,
   Button,
-  Box,
 } from "@chakra-ui/react";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronDownIcon,
-  ChevronUpIcon,
 } from "@chakra-ui/icons";
+import { dehydrate, QueryClient, useQuery } from "react-query";
+import { getTopicList } from "@libs/unsplash";
+import LoadingSpinner from "@components/LoadingSpinner";
 import { useSetRecoilState } from "recoil";
 import { topicInfoState } from "@libs/recoil-atoms";
-
 import Link from "next/link";
 
 const HeaderLayout = chakra(Flex, {
   baseStyle: {
     width: "90%",
-    maxWidth:"1428px",
+    maxWidth: "1428px",
     height: "8rem",
     alignItems: "center",
     justifyContent: "start",
@@ -44,7 +44,7 @@ const HeaderText = chakra(Text, {
 const NavigationContainer = chakra(Flex, {
   baseStyle: {
     width: "80vw",
-    maxWidth:"1280px",
+    maxWidth: "1280px",
     height: "8rem",
     padding: "1%",
     alignItems: "center",
@@ -101,11 +101,25 @@ const SliderButton = chakra(IconButton, {
   },
 });
 
-interface INavigationProps {
-  topics: Array<any>;
+export async function getServerSideProps() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(["topics"], getTopicList);
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
 }
 
-const NavigationHeader: React.FC<INavigationProps> = ({ topics }) => {
+export default function NavigationHeader() {
+  const {
+    data: topics,
+    error: error,
+    isError: isError,
+    isLoading: isLoading,
+  } = useQuery<any>("topics", getTopicList);
+
   const sliderRef = useRef(null) as any;
   const [isEditorial, setIsEditorial] = useState<boolean>(true);
   const scrollToR = (
@@ -144,6 +158,11 @@ const NavigationHeader: React.FC<INavigationProps> = ({ topics }) => {
   const goDiscover = (topicId: string) => {
     changeTopic({ topicId });
   };
+  const warning = error as any;
+
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <p>Something went wrong: {warning.message}</p>;
+
   return (
     <HeaderLayout>
       <Flex
@@ -161,7 +180,9 @@ const NavigationHeader: React.FC<INavigationProps> = ({ topics }) => {
               rightIcon={<ChevronDownIcon />}
               backgroundColor={"white"}
             >
-              <HeaderText fontSize={"xl"} p={1}>Discover</HeaderText>
+              <HeaderText fontSize={"xl"} p={1}>
+                Discover
+              </HeaderText>
             </MenuButton>
             <MenuList>
               <MenuItem onClick={() => setIsEditorial(true)}>
@@ -227,6 +248,4 @@ const NavigationHeader: React.FC<INavigationProps> = ({ topics }) => {
       </Fade>
     </HeaderLayout>
   );
-};
-
-export default NavigationHeader;
+}

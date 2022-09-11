@@ -15,7 +15,6 @@ interface ILandingProps {
   homeFeeds: any;
   isLoading: boolean;
   isError: boolean;
-  topics: any;
   feedError?: any;
 }
 
@@ -33,7 +32,6 @@ const LandingPresenter: React.FC<ILandingProps> = ({
   isLoading,
   isError,
   feedError,
-  topics,
 }) => {
   const router = useRouter();
 
@@ -51,7 +49,7 @@ const LandingPresenter: React.FC<ILandingProps> = ({
       >
         <Photo />
       </PopupModal>
-      <NavigationHeader topics={topics} />
+      <NavigationHeader/>
       <MasonryLayout>
         {homeFeeds?.map((photo: any) => {
           return (

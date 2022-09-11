@@ -21,12 +21,7 @@ import {
   MenuOptionGroup,
   Select,
 } from "@chakra-ui/react";
-import {
-  ExpendMoreIcon,
-  CollectionIcon,
-  PhotoIcon,
-  TuneIcon,
-} from "@components/SvgIcons";
+import { ExpendMoreIcon, TuneIcon } from "@components/SvgIcons";
 import { searchQueryState } from "@libs/recoil-atoms";
 import { useRecoilState } from "recoil";
 
@@ -41,7 +36,7 @@ const ColorOption: React.FC<IColorOption> = ({ colorName, colorCode }) => {
       justify={"start"}
       alignItems={"center"}
       width={"100%"}
-      height={"8rem"}
+      height={"4rem"}
     >
       <Box
         rounded={"full"}
@@ -108,7 +103,6 @@ const SearchFilter = () => {
                 <Text fontWeight={"semibold"}>Orientation</Text>
               )}
               <Select
-                
                 placeholder="Select Orientation"
                 onChange={(event) => setOrientation(event.target.value)}
               >
