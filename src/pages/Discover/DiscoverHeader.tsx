@@ -23,7 +23,7 @@ const HeaderBackGround = chakra(Box, {
     left: 0,
     width: "100vw",
     height: "50vh",
-    backdropFilter:"brightness(0.75)",
+    backdropFilter: "brightness(0.75)",
   },
 });
 
@@ -36,17 +36,17 @@ const HeaderContainer = chakra(Flex, {
     width: "90%",
     height: "40vh",
     color: "white",
-    zIndex:10
+    zIndex: 10,
   },
 });
 
 interface IHeaderProps {
-  topicTitle: string;
-  topicDescription: string;
-  imageUrl: string;
-  isLoading:boolean
-  isError:boolean
-  error:any
+  topicTitle?: string;
+  topicDescription?: string;
+  imageUrl?: string;
+  isLoading: boolean;
+  isError: boolean;
+  error: any;
 }
 
 const DiscoverHeader: React.FC<IHeaderProps> = ({
@@ -58,15 +58,17 @@ const DiscoverHeader: React.FC<IHeaderProps> = ({
   error,
 }) => {
   const markup = () => {
-    return { __html: DOMPurify.sanitize(topicDescription) };
+    if (topicDescription) {
+      return { __html: DOMPurify.sanitize(topicDescription) };
+    }
   };
-  
+
   if (isLoading) return <LoadingSpinner />;
 
   if (isError) return <p>Something went wrong: {error.message}</p>;
   return (
     <HeaderLayout backgroundImage={`url(${imageUrl})`}>
-      <HeaderBackGround/>
+      <HeaderBackGround />
       <HeaderContainer>
         <Text fontSize={"3xl"} fontWeight={"semibold"}>
           {topicTitle}

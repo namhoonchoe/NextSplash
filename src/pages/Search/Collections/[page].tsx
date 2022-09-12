@@ -28,7 +28,7 @@ export default function CollectionLayout() {
     error,
     isError,
     isLoading,
-  } = useQuery<Array<any>>(["searchCollections", query], () =>
+  } = useQuery<Array<ISearchCollection>>(["searchCollections", query], () =>
     searchCollections(query)
   );
 

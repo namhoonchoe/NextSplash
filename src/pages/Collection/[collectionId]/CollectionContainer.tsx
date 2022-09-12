@@ -26,7 +26,7 @@ export default function CollectionContainer() {
     isError,
     isLoading,
     error
-  } = useQuery<any>("collection", () => getCollection(collectionId as string)) ;
+  } = useQuery<ICollection>("collection", () => getCollection(collectionId as string)) ;
   const {
     data: collectionPhotos
   } = useQuery<any>("collectionPhotos", () => getCollectionPhotos(collectionId as string)) ;

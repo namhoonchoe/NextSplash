@@ -18,7 +18,7 @@ const MainContainer = chakra(Flex, {
 });
 
 interface IMainProps {
-  topicPhotos: Array<ITopicPhoto>;
+  topicPhotos?: Array<ITopicPhoto>;
   isLoading: boolean;
   isError: boolean;
   error: any;
@@ -50,6 +50,7 @@ const DiscoverMain: React.FC<IMainProps> = ({
               key={topicPhoto.id}
               href={`/Discover/?id=${topicPhoto.id}`}
               as={`/Photo/${topicPhoto.id}`}
+              scroll={false}
             >
                 <MasonryItem key={topicPhoto.id} >
                   <ImageCard

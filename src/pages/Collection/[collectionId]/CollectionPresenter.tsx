@@ -15,7 +15,7 @@ interface ICollectionProps {
   isLoading: boolean;
   isError: boolean;
   error:any
-  collection: any;
+  collection?: ICollection;
   collectionPhotos: any;
 }
 
@@ -134,6 +134,7 @@ const CollectionPresenter: React.FC<ICollectionProps> = ({
                   <Link
                     key={photo.id}
                     href={`/Collection/${collection.id}/?id=${photo.id}`}
+                    scroll={false}
                   >
                     <MasonryItem>
                       <ImageCard

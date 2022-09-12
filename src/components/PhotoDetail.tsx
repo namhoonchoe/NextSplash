@@ -29,7 +29,7 @@ const PhotoDetail: React.FC<IPhotoDetail> = ({ id }) => {
     isError,
     error,
     isLoading,
-  } = useQuery<any>("photo", () => getPhoto(id as string));
+  } = useQuery<IPhoto>("photo", () => getPhoto(id as string));
 
   const PhotoDetailLayout = chakra(Flex, {
     baseStyle: {

@@ -19,7 +19,7 @@ export default function LandingContainer() {
     error: feedsError,
     isError,
     isLoading,
-  } = useQuery<any>("Editorials", getEditorials);
+  } = useQuery<Array<IPhoto>>("Editorials", getEditorials);
 
 
 

@@ -5,5 +5,5 @@ module.exports = {
     domains: ['images.unsplash.com'] ,
   },
   reactStrictMode: true,
-  swcMinify: true,
+  swcMinify: true
 };

@@ -35,7 +35,7 @@ export default function SearchPhotos() {
     isError,
     isLoading,
     error,
-  } = useQuery<Array<any>>(["searchPhotos", searchQuery], () =>
+  } = useQuery<Array<ISearchPhoto>>(["searchPhotos", searchQuery], () =>
     searchPhotos({ ...searchQuery })
   );
   const warning = error as any;
@@ -74,6 +74,7 @@ export default function SearchPhotos() {
                 key={photo.id}
                 href={`/Search/?id=${photo.id}`}
                 as={`/Photo/${photo.id}`}
+                scroll={false}
               >
                 <MasonryItem key={photo.id}>
                   <ImageCard

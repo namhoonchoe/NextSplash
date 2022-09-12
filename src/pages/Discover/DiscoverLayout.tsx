@@ -27,21 +27,21 @@ const DiscoverLayout: React.FC = () => {
     isError: isPhotosError,
     isLoading: isPhotosLoading,
     error: photosError,
-  } = useQuery<any>(["topicPhotos", topicId], () => getTopicPhotos(topicId));
+  } = useQuery<Array<ITopicPhoto>>(["topicPhotos", topicId], () => getTopicPhotos(topicId));
 
   const {
     data: topics,
     error: topicsError,
     isLoading: isTopicsLoading,
     isError: isTopicsError,
-  } = useQuery<any>("topics", getTopicList);
+  } = useQuery<Array<ITopic>>("topics", getTopicList);
 
   const {
     data: topic,
     error: aTopicError,
     isLoading: isAtopicLoading,
     isError: isAtopicError,
-  } = useQuery<any>(["topic", topicId], () => getTopic(topicId));
+  } = useQuery<ITopic>(["topic", topicId], () => getTopic(topicId));
 
   useEffect(() => {
     let mounted = true;

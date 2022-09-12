@@ -27,7 +27,7 @@ interface ITopicCardProps {
 }
 
 interface NavigationProps {
-  topics: Array<ITopic>;
+  topics?: Array<ITopic>;
   isLoading: boolean;
   isError: boolean;
   error: any;

@@ -12,7 +12,7 @@ import Photo from "../Photo/[id]";
 import NavigationHeader from "./NavigationHeader";
 
 interface ILandingProps {
-  homeFeeds: any;
+  homeFeeds?: Array<IPhoto>;
   isLoading: boolean;
   isError: boolean;
   feedError?: any;

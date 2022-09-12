@@ -1,29 +1,3 @@
-interface IRandom {
-  id: string;
-  created_at: string;
-  updated_at: string;
-  promoted_at: string;
-  width: number;
-  height: number;
-  color: string;
-  blur_hash: string;
-  description: string | null;
-  alt_description: string | null;
-  urls: IUrls;
-  links: ILinks;
-  categories: Array<any>;
-  likes: number;
-  liked_by_user: boolean;
-  current_user_collections: Array<any>;
-  sponsorship: any;
-  topic_submissions: any;
-  user: IUser;
-  exif: IExif;
-  location: ILocation;
-  views: number;
-  downloads: number;
-}
-
 interface IExif {
   make: string;
   model: string;
