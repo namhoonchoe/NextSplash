@@ -12,7 +12,7 @@ const PopupModal: React.FC<IModalProps> = ({ onClose, children }) => {
   const { id } = router.query;
 
   return (
-    <Modal isOpen={!!id} onClose={onClose} isCentered={true}>
+    <Modal isOpen={!!id} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>{children}</ModalContent>
     </Modal>

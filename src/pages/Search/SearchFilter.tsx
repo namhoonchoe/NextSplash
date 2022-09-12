@@ -186,7 +186,7 @@ const SearchFilter = () => {
                       />
                     </MenuItemOption>
                     <MenuItemOption value="magenta">
-                      <ColorOption colorName={"White"} colorCode={"pink.300"} />
+                      <ColorOption colorName={"Magenta"} colorCode={"pink.300"} />
                     </MenuItemOption>
                     <MenuItemOption value="green">
                       <ColorOption

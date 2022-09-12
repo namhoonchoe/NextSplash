@@ -19,14 +19,17 @@ const MainContainer = chakra(Flex, {
 
 interface IMainProps {
   topicPhotos: Array<ITopicPhoto>;
-  isLoading:boolean
-  isError:boolean
-  error:any
+  isLoading: boolean;
+  isError: boolean;
+  error: any;
 }
 
-const DiscoverMain: React.FC<IMainProps> = ({ topicPhotos,  isLoading,
+const DiscoverMain: React.FC<IMainProps> = ({
+  topicPhotos,
+  isLoading,
   isError,
-  error, }) => {
+  error,
+}) => {
   const router = useRouter();
   if (isLoading) return <LoadingSpinner />;
 
@@ -48,13 +51,13 @@ const DiscoverMain: React.FC<IMainProps> = ({ topicPhotos,  isLoading,
               href={`/Discover/?id=${topicPhoto.id}`}
               as={`/Photo/${topicPhoto.id}`}
             >
-              <MasonryItem key={topicPhoto.id}>
-                <ImageCard
-                  width={topicPhoto.width}
-                  height={topicPhoto.height}
-                  source={topicPhoto.urls.regular}
-                />
-              </MasonryItem>
+                <MasonryItem key={topicPhoto.id} >
+                  <ImageCard
+                    width={topicPhoto.width}
+                    height={topicPhoto.height}
+                    source={topicPhoto.urls.regular}
+                  />
+                </MasonryItem>
             </Link>
           );
         })}

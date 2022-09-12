@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, chakra, Flex } from "@chakra-ui/react";
+import LoadingSpinner from "./LoadingSpinner"
 
 interface IImageProps {
   width: number;
@@ -28,6 +29,8 @@ const ImageCard: React.FC<IImageProps> = ({
     <CenterBox
       width={`${componentWidthRem}rem`}
       height={`${componentWidthRem * ratio}rem`}
+      borderRadius={borderRadius}
+      backgroundColor={"gray.100"}
     >
       <Image
         src={source}
@@ -36,6 +39,8 @@ const ImageCard: React.FC<IImageProps> = ({
         alt="cannot load image"
         borderRadius={borderRadius}
         display={"inline-block"}
+        loading={"lazy"}
+        fallback={<LoadingSpinner/>}
       />
     </CenterBox>
   );
