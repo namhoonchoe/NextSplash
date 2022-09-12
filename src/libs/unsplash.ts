@@ -22,19 +22,6 @@ export const getEditorials = async () => {
 };
 
 
-
-
-export const getRandomPhotos = async () => {
-  const { data } = await unsplashApi.get("photos/random", {
-    params: {
-      count: 20,
-      featured: true,
-    },
-  });
-  return data;
-};
-
-
 export const getPhoto = async (id: string | string[] | undefined) => {
   const { data } = await unsplashApi.get(`photos/${id}`, {
     params: {

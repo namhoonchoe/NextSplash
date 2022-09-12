@@ -1,4 +1,7 @@
 import { atom } from "recoil";
+import { recoilPersist } from 'recoil-persist'
+
+const { persistAtom } = recoilPersist()
 
 interface ITopic {
   topicId:string
@@ -16,7 +19,9 @@ export const topicInfoState = atom<ITopic>({
   key:"topicInfo",
   default:{
     topicId:"",
-  }
+  },
+  effects_UNSTABLE: [persistAtom],
+
 })
 
 
@@ -27,5 +32,7 @@ export const searchQueryState = atom<ISearchQuery>({
     orientation:undefined,
     color:undefined,
     orderBy:undefined
-  }
+  },
+  effects_UNSTABLE: [persistAtom],
+
 })

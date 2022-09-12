@@ -21,9 +21,9 @@ const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   if (Component.getLayout) {
     return (
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <ChakraProvider>
+      <ChakraProvider>
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
             <RecoilRoot>
               <CenterBenchMark />
               <ScreenLayout>
@@ -31,9 +31,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
               </ScreenLayout>
             </RecoilRoot>
             <ReactQueryDevtools initialIsOpen={false} />
-          </ChakraProvider>
-        </Hydrate>
-      </QueryClientProvider>
+          </Hydrate>
+        </QueryClientProvider>
+      </ChakraProvider>
     );
   }
 

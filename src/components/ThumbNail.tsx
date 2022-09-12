@@ -44,8 +44,8 @@ const ThumbNails: React.FC<IThumbNailProps> = ({
       <ImageContainer
         rowSpan={1}
         colSpan={1}
-        backgroundImage={sourceTwo && `url(${sourceTwo})`}
-        bgGradient="linear(to-b, #A0AEC0, #CBD5E0)"
+        backgroundImage={sourceTwo &&`url(${sourceTwo})`}
+        backgroundColor={"gray.200"}
         borderTopRightRadius={"md"}
       />
 
@@ -54,7 +54,7 @@ const ThumbNails: React.FC<IThumbNailProps> = ({
         colSpan={1}
         borderColor={"white"}
         backgroundImage={sourceThree && `url(${sourceThree})`}
-        bgGradient="linear(to-b, #A0AEC0, #CBD5E0)"
+        backgroundColor={"gray.200"}
         borderBottomRightRadius={"md"}
       />
     </ThumbNailContainer>

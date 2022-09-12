@@ -57,6 +57,7 @@ const LandingPresenter: React.FC<ILandingProps> = ({
               key={photo.id}
               href={`/?id=${photo.id}`}
               as={`/Photo/${photo.id}`}
+              scroll={false}
             >
               <MasonryItem>
                 <ImageCard
