@@ -4,7 +4,7 @@ import ImageCard from "@components/ImageCard";
 import MasonryLayout from "@components/MasonryLayout";
 import PopupModal from "@components/PopupModal";
 import LoadingSpinner from "@components/LoadingSpinner";
-import Seo from "@components/Seo"
+import Seo from "@components/Seo";
 import { chakra, Flex } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -41,15 +41,11 @@ const LandingPresenter: React.FC<ILandingProps> = ({
 
   return (
     <MainContainer>
-      <Seo title={"Home"}/>
-      <PopupModal
-        onClose={() => {
-          router.replace("/");
-        }}
-      >
+      <Seo title={"Home"} />
+      <PopupModal>
         <Photo />
       </PopupModal>
-      <NavigationHeader/>
+      <NavigationHeader />
       <MasonryLayout>
         {homeFeeds?.map((photo: any) => {
           return (

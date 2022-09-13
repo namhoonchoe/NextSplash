@@ -47,11 +47,7 @@ export default function SearchPhotos() {
   return (
     <ColumnLayout>
       <Seo title={"Search"} />
-      <PopupModal
-        onClose={() => {
-          router.replace("/Search");
-        }}
-      >
+      <PopupModal>
         <Photo />
       </PopupModal>
 

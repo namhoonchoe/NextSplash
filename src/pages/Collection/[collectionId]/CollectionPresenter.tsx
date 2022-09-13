@@ -14,7 +14,7 @@ import Photo from "../../Photo/[id]";
 interface ICollectionProps {
   isLoading: boolean;
   isError: boolean;
-  error:any
+  error: any;
   collection?: ICollection;
   collectionPhotos: any;
 }
@@ -64,8 +64,6 @@ const UserContainer = chakra(Flex, {
   },
 });
 
-
-
 const CollectionPresenter: React.FC<ICollectionProps> = ({
   isLoading,
   isError,
@@ -85,12 +83,8 @@ const CollectionPresenter: React.FC<ICollectionProps> = ({
       {isLoading && <p>Loading...</p>}
       {collection && (
         <CollectionLayout>
-        <Seo title={"Collection"} />
-          <PopupModal
-            onClose={() => {
-              router.replace(`/Collection/${collection.id}`);
-            }}
-          >
+          <Seo title={"Collection"} />
+          <PopupModal>
             <Photo />
           </PopupModal>
           <BackgroundContainer
@@ -128,25 +122,25 @@ const CollectionPresenter: React.FC<ICollectionProps> = ({
               {collection.total_photos} Photos
             </Text>
           </HeaderContainer>
-            <MasonryLayout>
-              {collectionPhotos?.map((photo: any) => {
-                return (
-                  <Link
-                    key={photo.id}
-                    href={`/Collection/${collection.id}/?id=${photo.id}`}
-                    scroll={false}
-                  >
-                    <MasonryItem>
-                      <ImageCard
-                        width={photo.width}
-                        height={photo.height}
-                        source={photo.urls.regular}
-                      />
-                    </MasonryItem>
-                  </Link>
-                );
-              })}
-            </MasonryLayout>
+          <MasonryLayout>
+            {collectionPhotos?.map((photo: any) => {
+              return (
+                <Link
+                  key={photo.id}
+                  href={`/Collection/${collection.id}/?id=${photo.id}`}
+                  scroll={false}
+                >
+                  <MasonryItem>
+                    <ImageCard
+                      width={photo.width}
+                      height={photo.height}
+                      source={photo.urls.regular}
+                    />
+                  </MasonryItem>
+                </Link>
+              );
+            })}
+          </MasonryLayout>
         </CollectionLayout>
       )}
     </>

@@ -36,11 +36,7 @@ const DiscoverMain: React.FC<IMainProps> = ({
   if (isError) return <p>Something went wrong: {error.message}</p>;
   return (
     <MainContainer>
-      <PopupModal
-        onClose={() => {
-          router.replace("/Discover");
-        }}
-      >
+      <PopupModal>
         <Photo />
       </PopupModal>
       <MasonryLayout>
@@ -52,13 +48,13 @@ const DiscoverMain: React.FC<IMainProps> = ({
               as={`/Photo/${topicPhoto.id}`}
               scroll={false}
             >
-                <MasonryItem key={topicPhoto.id} >
-                  <ImageCard
-                    width={topicPhoto.width}
-                    height={topicPhoto.height}
-                    source={topicPhoto.urls.regular}
-                  />
-                </MasonryItem>
+              <MasonryItem key={topicPhoto.id}>
+                <ImageCard
+                  width={topicPhoto.width}
+                  height={topicPhoto.height}
+                  source={topicPhoto.urls.regular}
+                />
+              </MasonryItem>
             </Link>
           );
         })}
