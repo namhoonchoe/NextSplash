@@ -66,13 +66,7 @@ const PhotoDetail: React.FC<IPhotoDetail> = ({ id }) => {
     },
   });
 
-  const DetailFooter = chakra(Flex, {
-    baseStyle: {
-      width: "100%",
-      justifyContent: "start",
-      alignItems: "start",
-    },
-  });
+
   const warning = error as any;
 
   if (isLoading) return <LoadingSpinner />;
@@ -113,7 +107,6 @@ const PhotoDetail: React.FC<IPhotoDetail> = ({ id }) => {
             />
           </DetailBody>
 
-          <DetailFooter></DetailFooter>
         </PhotoDetailLayout>
       )}
     </>

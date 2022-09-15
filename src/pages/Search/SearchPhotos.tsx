@@ -12,7 +12,6 @@ import PopupModal from "@components/PopupModal";
 import LoadingSpinner from "@components/LoadingSpinner";
 import Seo from "@components/Seo";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Photo from "../Photo/[id]";
 
 const SearchTitle = chakra(Flex, {
@@ -26,7 +25,6 @@ const SearchTitle = chakra(Flex, {
 });
 
 export default function SearchPhotos() {
-  const router = useRouter();
 
   const searchQuery = useRecoilValue(searchQueryState);
   const { query } = searchQuery;

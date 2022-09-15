@@ -10,7 +10,6 @@ export const CenterBenchMark = chakra(Box,{
 export const ScreenLayout = chakra(Flex,{
   baseStyle:{
     width:"100%",
-    maxWidth:"1582px",
     flexDirection:"column",
     justifyContent:"start",
     alignItems:"center",
@@ -19,12 +18,14 @@ export const ScreenLayout = chakra(Flex,{
     left:0,
     right:0,
     marginX:"auto",
+    overflowX:"hidden"
   }
 })
 
 export const ColumnLayout = chakra(Flex,{
   baseStyle:{
     width:"100%",
+    maxWidth:"1582px",
     flexDirection:"column",
     justifyContent:"start",
     alignItems:"center",
@@ -45,8 +46,7 @@ export const ResponsiveGrid = chakra(Grid,{
 export const MasonryItem = chakra(Box, {
   baseStyle: {
     display: "inline-block",
-    marginBottom: "1.5rem",
-    marginRight:"1.5rem",
+    marginY:"1vw",
     breakInside: "avoid",
     _hover:{filter: "brightness(65%)"}
   },

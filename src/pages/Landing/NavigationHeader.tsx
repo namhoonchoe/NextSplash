@@ -165,36 +165,30 @@ export default function NavigationHeader() {
 
   return (
     <HeaderLayout>
-      <Flex
-        alignItems={"center"}
-        justifyContent={"center"}
-        height={"5rem"}
-        width={"10%"}
-      >
-        <Menu isLazy>
-          <>
-            <MenuButton
-              size={"xl"}
-              isActive={isEditorial}
-              as={Button}
-              rightIcon={<ChevronDownIcon />}
-              backgroundColor={"white"}
-            >
-              <HeaderText fontSize={"xl"} p={1}>
-                Discover
-              </HeaderText>
-            </MenuButton>
-            <MenuList>
-              <MenuItem onClick={() => setIsEditorial(true)}>
-                <HeaderText>Editorial</HeaderText>
-              </MenuItem>
-              <MenuItem onClick={() => setIsEditorial(false)}>
-                <HeaderText>Themes</HeaderText>
-              </MenuItem>
-            </MenuList>
-          </>
-        </Menu>
-      </Flex>
+      <Menu isLazy>
+        <>
+          <MenuButton
+            size={"xl"}
+            isActive={isEditorial}
+            as={Button}
+            padding={2}
+            rightIcon={<ChevronDownIcon />}
+            backgroundColor={"white"}
+          >
+            <HeaderText fontSize={"xl"} >
+              Discover
+            </HeaderText>
+          </MenuButton>
+          <MenuList>
+            <MenuItem onClick={() => setIsEditorial(true)}>
+              <HeaderText>Editorial</HeaderText>
+            </MenuItem>
+            <MenuItem onClick={() => setIsEditorial(false)}>
+              <HeaderText>Themes</HeaderText>
+            </MenuItem>
+          </MenuList>
+        </>
+      </Menu>
       <Fade in={!isEditorial}>
         <NavigationContainer>
           <ButtonWrapper>

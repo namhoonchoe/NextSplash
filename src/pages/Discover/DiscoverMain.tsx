@@ -5,7 +5,6 @@ import MasonryLayout from "@components/MasonryLayout";
 import ImageCard from "@components/ImageCard";
 import PopupModal from "@components/PopupModal";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Photo from "../Photo/[id]";
 import LoadingSpinner from "@components/LoadingSpinner";
 
@@ -30,7 +29,6 @@ const DiscoverMain: React.FC<IMainProps> = ({
   isError,
   error,
 }) => {
-  const router = useRouter();
   if (isLoading) return <LoadingSpinner />;
 
   if (isError) return <p>Something went wrong: {error.message}</p>;

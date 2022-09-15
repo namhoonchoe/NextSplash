@@ -7,7 +7,6 @@ import LoadingSpinner from "@components/LoadingSpinner";
 import Seo from "@components/Seo";
 import { chakra, Flex } from "@chakra-ui/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Photo from "../Photo/[id]";
 import NavigationHeader from "./NavigationHeader";
 
@@ -33,7 +32,6 @@ const LandingPresenter: React.FC<ILandingProps> = ({
   isError,
   feedError,
 }) => {
-  const router = useRouter();
 
   if (isLoading) return <LoadingSpinner />;
 

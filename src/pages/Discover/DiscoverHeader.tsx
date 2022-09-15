@@ -33,7 +33,7 @@ const HeaderContainer = chakra(Flex, {
     justifyContent: "end",
     alignItems: "start",
     padding: "1%",
-    width: "90%",
+    width: "90vw",
     height: "40vh",
     color: "white",
     zIndex: 10,
