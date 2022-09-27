@@ -32,7 +32,6 @@ const MasonryLayout: React.FC<childComponent> = ({ children }) => {
 
     return () => {
       window.removeEventListener("resize", checkColumns);
-      console.log(columnCount);
     };
   }, [columnCount, isLargerThan1440, isLargerThan1024, isLargerThan640]);
 
@@ -61,7 +60,6 @@ const MasonryLayout: React.FC<childComponent> = ({ children }) => {
 
     return () => {
       mounted = false;
-      console.log(columnCount);
     };
   }, [columnCount, isLargerThan1440, isLargerThan1024, isLargerThan640]);
 
